@@ -4,8 +4,9 @@
 ---
 
 ##### Integrantes:
-1. *[Poner aquí Nombre y Apellidos del integrante 1]*
-2. *[Poner aquí Nombre y Apellidos del integrante 2]*
+1. Salomon Charabati
+2. Mauricio Cohello
+3. Eric Parton
 
 
 ---
