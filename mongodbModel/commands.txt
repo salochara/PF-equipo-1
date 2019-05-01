@@ -1,0 +1,78 @@
+docker cp "C:\Users\Eric\Desktop\PF-equipo-1\mongodbModel\data\profesionales.txt" mongodb:/
+docker exec -it mongodb bash
+
+mongoimport --jsonArray --db final --collection profesionales --file profesionales.txt
+mongo
+
+db.ciudades.insert([{
+  "index": 0,
+  "nombre": 'CDMX'
+},
+{
+  "index": 1,
+  "nombre": 'Guadalajara'
+},
+{
+  "index": 2,
+  "nombre": 'Puebla'
+},
+{
+  "index": 3,
+  "nombre": 'Querétaro'
+},
+{
+  "index": 4,
+  "nombre": 'Monterrey'
+},
+{
+  "index": 5,
+  "nombre": 'Cancún'
+}])
+
+db.createCollection("servicios")
+db.servicios.insert([{
+  "index": 0,
+  "nombre": "plomería"
+}, {
+  "index": 1,
+  "nombre": "carpintería"
+}, {
+  "index": 2,
+  "nombre": "pintura"
+}, {
+  "index": 3,
+  "nombre": "herrería"
+}, {
+  "index": 4,
+  "nombre": "vidrería"
+}, {
+  "index": 5,
+  "nombre": "decoración"
+}, {
+  "index": 6,
+  "nombre": "jardinería"
+}, {
+  "index": 7,
+  "nombre": "reparación de electrodomésticos"
+}, {
+  "index": 8,
+  "nombre": "mecánica"
+}, {
+  "index": 9,
+  "nombre": "pisos"
+}, {
+  "index": 10,
+  "nombre": "ferretería"
+}, {
+  "index": 11,
+  "nombre": "ilumincación"
+}, {
+  "index": 12,
+  "nombre": "albañilería"
+}, {
+  "index": 13,
+  "nombre": "cerrajería"
+}, {
+  "index": 14,
+  "nombre": "demoliciones"
+}])

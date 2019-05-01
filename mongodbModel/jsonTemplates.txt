@@ -1,0 +1,18 @@
+Profesionales:
+[
+  '{{repeat(1000, 1000)}}',
+  {
+    index: '{{index()}}',
+    foto: 'http://placehold.it/32x32',
+    nombre: '{{firstName()}} {{surname()}}',
+    correo: '{{email()}}',
+    telefono: '+52 1 {{phone()}}',
+    descripcion: '{{lorem(2, "sentences")}}',
+    fechaDeRegistro: '{{date(new Date(2014, 0, 1), new Date(), "YYYY-MM-ddThh:mm:ss Z")}}',
+    servicios: ['{{integer(0, 14)}}'],
+    ciudad: function (tags) {
+      var ciudad = ['CDMX', 'Guadalajara', 'Puebla', 'Querétaro', 'Monterrey', 'Cancún'];
+      return ciudad[tags.integer(0, ciudad.length - 1)];
+    }
+  }
+]
