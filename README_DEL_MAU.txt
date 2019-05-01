@@ -1,5 +1,6 @@
 COMO CORRERLO:
     Ejecutar: 
+        docker-compose build
         docker-compose up -d
         * BACKEND
             En una terminal ejecutar (para debuggear y actualizar el back en cada cambio):

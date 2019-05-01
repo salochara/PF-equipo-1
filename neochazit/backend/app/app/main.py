@@ -1,15 +1,12 @@
-# Import installed packages
-from flask import Flask, jsonify
+from flask import Flask
+from flask_jwt_extended import JWTManager
+from flask_cors import CORS
 
-# Import app code
 app = Flask(__name__)
+app.config['JWT_SECRET_KEY'] = 'Super_Secret_JWT_KEY'
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = False
 
-# After creating the app, so that cors can import it
-from app import cors
+CORS(app)
+jwt = JWTManager(app)
 
-@app.route("/api/")
-def root():
-    return jsonify({"message": "Hello WorldX5"})
-
-if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=80)
+from app import routes
