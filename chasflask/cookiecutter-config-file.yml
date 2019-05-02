@@ -1,0 +1,29 @@
+default_context:
+  project_name: 'chasFlask'
+  project_slug: 'chasflask'
+  domain_main: 'chasflask.com'
+  domain_staging: 'stag.chasflask.com'
+  docker_swarm_stack_name_main: 'chasflask-com'
+  docker_swarm_stack_name_staging: 'stag-chasflask-com'
+  secret_key: 'de7c05fd3a1f21ad50193932c7c61cbddf6096098525ee62d2df4cd928bf91c0'
+  first_superuser: 'admin@chasflask.com'
+  first_superuser_password: 'admin'
+  backend_cors_origins: 'http://localhost, http://localhost:4200, http://localhost:3000, http://localhost:8080, https://localhost, https://localhost:4200, https://localhost:3000, https://localhost:8080, http://dev.chasflask.com, https://stag.chasflask.com, https://chasflask.com, http://local.dockertoolbox.tiangolo.com, http://localhost.tiangolo.com'
+  postgres_password: 'admin'
+  pgadmin_default_user: 'admin@chasflask.com'
+  pgadmin_default_user_password: 'admin'
+  traefik_constraint_tag: 'chasflask.com'
+  traefik_constraint_tag_staging: 'stag.chasflask.com'
+  traefik_public_network: 'traefik-public'
+  traefik_public_constraint_tag: 'traefik-public'
+  flower_auth: 'admin:admin'
+  sentry_dsn: ''
+  docker_image_prefix: ''
+  docker_image_backend: 'backend'
+  docker_image_celeryworker: 'celeryworker'
+  docker_image_frontend: 'frontend'
+  _copy_without_render:
+    - frontend/src/**/*.html
+    - frontend/src/**/*.vue
+    - frontend/node_modules/*
+  _template: ./

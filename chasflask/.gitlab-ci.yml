@@ -1,0 +1,74 @@
+image: tiangolo/docker-with-compose
+
+before_script:
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  - pip install docker-auto-labels
+
+stages:
+  - test
+  - build
+  - deploy
+
+tests:
+  stage: test
+  script:
+    - sh ./script-test.sh
+  tags:
+    - build
+    - test
+
+build-stag:
+  stage: build
+  script:
+    - TAG=stag FRONTEND_ENV=staging sh ./script-build-push.sh
+  only:
+    - master
+  tags:
+    - build
+    - test
+    
+build-prod:
+  stage: build
+  script:
+    - TAG=prod FRONTEND_ENV=production sh ./script-build-push.sh
+  only:
+    - production
+  tags:
+    - build
+    - test
+
+deploy-stag:
+  stage: deploy
+  script: 
+    - >
+      DOMAIN=stag.chasflask.com
+      TRAEFIK_TAG=stag.chasflask.com
+      STACK_NAME=stag-chasflask-com
+      TAG=stag
+      sh ./script-deploy.sh
+  environment:
+    name: staging
+    url: https://stag.chasflask.com
+  only:
+    - master
+  tags:
+    - swarm
+    - stag
+
+deploy-prod:
+  stage: deploy
+  script:
+    - >
+      DOMAIN=chasflask.com
+      TRAEFIK_TAG=chasflask.com
+      STACK_NAME=chasflask-com
+      TAG=prod
+      sh ./script-deploy.sh
+  environment:
+    name: production
+    url: https://chasflask.com
+  only:
+    - production
+  tags:
+    - swarm
+    - prod
