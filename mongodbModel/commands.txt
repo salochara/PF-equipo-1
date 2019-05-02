@@ -29,7 +29,6 @@ db.ciudades.insert([{
   "nombre": 'Cancún'
 }])
 
-db.createCollection("servicios")
 db.servicios.insert([{
   "index": 0,
   "nombre": "plomería"
