@@ -15,4 +15,10 @@ COMO CORRERLO:
                         npm run serve
                     -Esto permitirá ver los cambios del front en http://localhost:8080
         Una vez hecho eso, para que el contenedor de docker del front no interfiera con el npm, hacer un docker kill del conentedor neochazit_frontend 
+
+PUBLISH
+    docker-compose build
+    TAG=prod FRONTEND_ENV=production bash ./build.sh
+    DOMAIN={{cookiecutter.domain_main}} TRAEFIK_TAG={{cookiecutter.traefik_constraint_tag}} STACK_NAME={{cookiecutter.docker_swarm_stack_name_main}} TAG=prod bash ./deploy.sh
+    
         

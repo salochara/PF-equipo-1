@@ -5,6 +5,10 @@ from sqlalchemy.orm import Session
 
 from app.db_models.item import Item
 from app.models.item import ItemCreate, ItemUpdate
+import pymongo
+
+client = pymongo.MongoClient('mongodb://mgcoello:Tovjip-wekqyx-xefbu3@advanceddatabases-shard-00-00-xn5qi.azure.mongodb.net:27017,advanceddatabases-shard-00-01-xn5qi.azure.mongodb.net:27017,advanceddatabases-shard-00-02-xn5qi.azure.mongodb.net:27017/test?ssl=true&replicaSet=AdvancedDatabases-shard-0&authSource=admin&retryWrites=true')
+dbMongo = client.PF
 
 
 def get(db_session: Session, *, id: int) -> Optional[Item]:
@@ -12,7 +16,15 @@ def get(db_session: Session, *, id: int) -> Optional[Item]:
 
 
 def get_multi(db_session: Session, *, skip=0, limit=100) -> List[Optional[Item]]:
-    return db_session.query(Item).offset(skip).limit(limit).all()
+    """return db_session.query(Item).offset(skip).limit(limit).all()"""
+    listRtn = []
+    tmp = dbMongo.Items.find()
+    for val in tmp:
+        tmpVal = Item()
+        tmpVal.title = val['title']
+        tmpVal.description = val['description']
+        listRtn.append(tmpVal)
+    return listRtn
 
 
 def get_multi_by_owner(
@@ -25,7 +37,6 @@ def get_multi_by_owner(
         .limit(limit)
         .all()
     )
-
 
 def create(db_session: Session, *, item_in: ItemCreate, owner_id: int) -> Item:
     item_in_data = jsonable_encoder(item_in)
