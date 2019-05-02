@@ -213,12 +213,11 @@ const PERMISSION_STATES = Config.get('/constants/PERMISSION_STATES')
     Log.log('seeding users')
     users = [
       {
-        firstName: faker.name.firstName(),
-        lastName: faker.name.lastName(),
-        email: 'test@user.com',
-        title: faker.name.jobTitle(),
-        // profileImageUrl: 'https://www.gravatar.com/avatar/' + Mongoose.Types.ObjectId().toString() + '?r=PG&d=robohash',
-        profileImageUrl: faker.image.avatar(),
+        firstName: "Paula",
+        lastName: "Mora Gómez",
+        email: "paula@chazit.es",
+        title: "Test ChazIt User",
+        profileImageUrl: "https://yelomws.blob.core.windows.net/yelofiles/beautiful-blur-blurred-background-733872.jpg",
         password: password,
         pin: pin,
         role: roles[0]._id,

@@ -52,6 +52,7 @@
                 <router-link tag="li"  :to="'/categories/' + category.Id">
                   <a class="users-list-name" href="#"> {{category.Title}}</a>
                 </router-link>
+
               </li>
             </ul>
             <!-- /.Category list -->
@@ -207,6 +208,23 @@
             this.$snotify.error('Failed Getting Categories from Azure', 'Error!')
           })
       },
+      postYeloService () {
+        this.loading = true
+        var today = new Date();
+        var obj = { DateTime: '2019-05-02', Description: '', RequestedDateTimeStart: '2019-05-02', RequestedDateTimeEnd: '2019-05-02', Latitude: 19.360140, Longitude: -99.258792, YeloCategory: 'pest', ServiceType: 0, YeloUserHeroContact: null };
+        var json = JSON.stringify(obj);
+        console.log(json)
+        chasitService.postServiceRequest(json)
+          .then((result) => {
+            this.categories = result.data
+            console.log(result)
+          })
+          .catch((error) => {
+            this.loading = false
+            console.error(error)
+            this.$snotify.error('Failed Getting Categories from Azure', 'Error!')
+          })
+      },
       createPieChart () {
         // -------------
         // - PIE CHART -
@@ -251,6 +269,7 @@
       this.getNewMembers()
       this.getYeloCategories()
       this.getYeloCards()
+      //this.postYeloService()
     },
     mounted () {
 //      $('.sparkbar').each(function () {
