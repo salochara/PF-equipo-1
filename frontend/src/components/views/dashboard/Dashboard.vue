@@ -50,7 +50,7 @@
               <li v-for="category in categories">
                 <!-- <img :src="category.profileImageUrl" alt="User Image"> -->
                 <img :src="'/static/img/chasit/' + category.IconResource + '-home@3x.png'" alt="User Image">
-                <h5>{{category.Title}}</h5>
+                <h5>{{category.CodeName}}</h5>
               </li>
             </ul>
             <!-- /.users-list -->
@@ -205,6 +205,23 @@
             this.$snotify.error('Failed Getting Categories from Azure', 'Error!')
           })
       },
+      postYeloService () {
+        this.loading = true
+        var today = new Date();
+        var obj = { DateTime: '2019-05-02', Description: '', RequestedDateTimeStart: '2019-05-02', RequestedDateTimeEnd: '2019-05-02', Latitude: 19.360140, Longitude: -99.258792, YeloCategory: 'pest', ServiceType: 0, YeloUserHeroContact: null };
+        var json = JSON.stringify(obj);
+        console.log(json)
+        chasitService.postServiceRequest(json)
+          .then((result) => {
+            this.categories = result.data
+            console.log(result)
+          })
+          .catch((error) => {
+            this.loading = false
+            console.error(error)
+            this.$snotify.error('Failed Getting Categories from Azure', 'Error!')
+          })
+      },
       createPieChart () {
         // -------------
         // - PIE CHART -
@@ -249,6 +266,7 @@
       this.getNewMembers()
       this.getYeloCategories()
       this.getYeloCards()
+      //this.postYeloService()
     },
     mounted () {
 //      $('.sparkbar').each(function () {
