@@ -44,15 +44,17 @@
           <!--<span class="label label-danger">8 New Members</span>-->
         </span>
           <!-- /box-tools -->
-
+          <!-- Category list -->
           <div slot="body">
             <ul class="users-list clearfix">
               <li v-for="category in categories">
-                <!-- <img :src="category.profileImageUrl" alt="User Image"> -->
                 <img :src="'/static/img/chasit/' + category.IconResource + '-home@3x.png'" alt="User Image">
-                <h5>{{category.Title}}</h5>
+                <router-link tag="li"  :to="'/categories/' + category.Id">
+                  <a class="users-list-name" href="#"> {{category.Title}}</a>
+                </router-link>
               </li>
             </ul>
+            <!-- /.Category list -->
             <!-- /.users-list -->
           </div>
           <!-- /.overlay -->

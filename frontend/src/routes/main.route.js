@@ -15,6 +15,7 @@ import documentRoutes from './documents.route'
 import imageRoutes from './images.route'
 
 import auditLogRoutes from './audit-logs.route'
+import categoryRoutes from './categories.route'
 
 const routes = [
   {
@@ -50,7 +51,8 @@ const routes = [
       ...connectionRoutes,
       ...documentRoutes,
       ...imageRoutes,
-      ...auditLogRoutes
+      ...auditLogRoutes,
+      ...categoryRoutes
     ]
   }
 ]

@@ -10,4 +10,5 @@ internals.getChazitUserCard = () =>{
     return http.getChazIt("https://hmgcmws.azurewebsites.net/api/V2.0/Stripe/GetCards")
 }
 
+
 export default internals
