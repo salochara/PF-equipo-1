@@ -21,4 +21,8 @@ PUBLISH
     TAG=prod FRONTEND_ENV=production bash ./build.sh
     DOMAIN={{cookiecutter.domain_main}} TRAEFIK_TAG={{cookiecutter.traefik_constraint_tag}} STACK_NAME={{cookiecutter.docker_swarm_stack_name_main}} TAG=prod bash ./deploy.sh
     
-        
+COMO CORRER V2:
+    Initial run (just one time use)
+        docker-compose build && docker-compose run --rm api npm run seed
+    Solo ejecución
+        docker-compose up --build
