@@ -26,6 +26,7 @@
 
         </div>
 
+        
         <div class="box-footer">
 
           <div class="row">
