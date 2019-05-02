@@ -1,0 +1,24 @@
+Profesionales:
+[
+  '{{repeat(1000, 1000)}}',
+  {
+    index: '{{index()}}',
+    foto: 'http://placehold.it/32x32',
+    nombre: '{{firstName()}} {{surname()}}',
+    correo: '{{email()}}',
+    telefono: '+52 1 {{phone()}}',
+    descripcion: '{{lorem(2, "sentences")}}',
+    fechaDeRegistro: '{{date(new Date(2014, 0, 1), new Date(), "YYYY-MM-ddThh:mm:ss Z")}}',
+    calificacion: '{{floating(3,5)}}',
+    votos: '{{integer(11, 100)}}',
+    servicios: function (tags) {
+      var servicios = ['plomeria', 'carpinteria', 'pintura', 'herraria', 'vidreria', 'decoracion', 'jardineria', 'reparacion de electrodomesticos', 'mecanica', 'pisos', 'ferreria', 'iluminacion', 'albañileria', 'cerrajeria', 'demoliciones'];
+      var megaCiudad = [servicios[tags.integer(0, servicios.length - 1)], servicios[tags.integer(0, servicios.length - 1)]];
+      return megaCiudad;
+    },
+    ciudad: function (tags) {
+      var ciudad = ['CDMX', 'Guadalajara', 'Puebla', 'Querétaro', 'Monterrey', 'Cancún'];
+      return ciudad[tags.integer(0, ciudad.length - 1)];
+    }
+  }
+]

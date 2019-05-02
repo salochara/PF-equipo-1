@@ -1,0 +1,41 @@
+Profesionales por ciudad
+ db.profesionales.aggregate([{$match:{"ciudad":"CDMX"}}]).pretty()
+	Ordenados por calificacion
+db.profesionales.aggregate([{$match:{"ciudad":"CDMX"}}, {$sort:{calificacion:-1}}]).pretty()
+	Ordenados por fecha de registro
+db.profesionales.aggregate([{$match:{"ciudad":"CDMX"}}, {$sort:{fechaDeRegistro:-1}}]).pretty()
+	Ordenador por votos
+db.profesionales.aggregate([{$match:{"ciudad":"CDMX"}}, {$sort:{votos:-1}}]).pretty()
+
+Profesionales por ciudad y servicio
+db.profesionales.aggregate([{$match:{"ciudad":"CDMX", "servicios":"pintura"}}]).pretty()
+	Ordenados por calificacion
+db.profesionales.aggregate([{$match:{"ciudad":"CDMX", "servicios":"pintura"}}, {$sort:{"calificacion":-1}}]).pretty()
+	Ordenados por fecha de registro
+db.profesionales.aggregate([{$match:{"ciudad":"CDMX", "servicios":"pintura"}}, {$sort:{"fechaDeRegistro":-1}}]).pretty()
+	Ordenador por votos
+db.profesionales.aggregate([{$match:{"ciudad":"CDMX", "servicios":"pintura"}}, {$sort:{"votos":-1}}]).pretty()
+
+Insertar nuevo profesional
+db.profesional.insert({
+    "index": 999,
+    "foto": "http://placehold.it/32x32",
+    "nombre": "Little Spence",
+    "correo": "littlespence@kozgene.com",
+    "telefono": "+52 1 (930) 481-3536",
+    "descripcion": "Culpa laboris dolor nulla quis est aliqua pariatur consequat. Mollit laboris do eu amet reprehenderit esse consequat amet commodo ipsum mollit.",
+    "fechaDeRegistro": "2015-12-30T03:37:45 +06:00",
+    "calificacion": 0,
+    "votos": 0,
+    "servicios": [
+      "pisos",
+      "plomeria"
+    ],
+    "ciudad": "Puebla"
+  })
+
+Insertar nuevo servicio
+db.servicios.insert({
+  "index": 9,
+  "nombre": "pisos"
+})

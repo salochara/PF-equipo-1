@@ -1,0 +1,18 @@
+MATCH (n)
+DETACH DELETE n
+
+LOAD CSV WITH HEADERS FROM 'file:///usuarios.txt' AS line
+CREATE (:Usuario{id:line.id, nombre:line.usuario, ciudad:line.ciudad, fechaDeInscripcion:line.fechaDeInscripcion, direccion:line.direccion,zip:line.zip,telefono:line.telefono})
+
+LOAD CSV WITH HEADERS FROM 'file:///profesionales.txt' AS line
+CREATE (:Profesional{id:line.id, nombre:line.usuario, ciudad:line.ciudad, fechaDeInscripcion:line.fechaDeInscripcion, direccion:line.direccion,zip:line.zip,telefono:line.telefono})
+
+LOAD CSV WITH HEADERS FROM 'file:///categorias.txt' AS line
+CREATE (:Categoria{id:line.id, nombre:line.nombre})
+
+LOAD CSV WITH HEADERS FROM 'file:///trabajos.txt' AS line
+CREATE (:Trabajo{id:line.id, descripcion:line.trabajoDesc, ciudad:line.ciudad, fechaPublicada:line.fechaDeInscripcion, categoriaID:line.categoria, userID:line.usuario})
+
+LOAD CSV WITH HEADERS FROM 'file:///trabajos.txt' AS line
+MATCH(Usuario:Usuario {id:line.usuario}), (Categoria:Categoria{id:line.categoria})
+CREATE (Usuario)-[:PUBLICO]->(Trabajo), (Trabajo)-[:TIPO]->(Categoria)
