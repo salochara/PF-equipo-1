@@ -24,43 +24,42 @@ A continuación se mencionan los requerimientos técnicos mínimos del proyecto,
 * Los diferentes componentes del proyecto (*frontend*, *backend*, *API RESTful*, bases de datos, entre otros) deberán ejecutarse sobre contenedores [Docker](https://www.docker.com/) y utilizar [Kubernetes](https://kubernetes.io/) como orquestador.
 * Todo el código, *datasets* y la documentación del proyecto debe alojarse en un repositorio de GitHub siguiendo al estructura que aparece a continuación.
 
-### 1.2 Estructura del repositorio
-El proyecto debe seguir la siguiente estructura de carpetas:
-```
-- / 			        # Raíz de todo el proyecto
-    - README.md			# Archivo con los datos del proyecto (este archivo)
-    - frontend			# Carpeta con la solución del frontend (Web app)
-    - backend			# Carpeta con la solución del backend (CMS)
-    - api			# Carpeta con la solución de la API
-    - datasets		        # Carpeta con los datasets y recursos utilizados (csv, json, audio, videos, entre otros)
-    - dbs			# Carpeta con los modelos, catálogos y scripts necesarios para generar las bases de datos
-    - models			# Carpeta donde se almacenarán los modelos de Machine Learning ya entrenados 
-    - docs			# Carpeta con la documentación del proyecto
-        - stage_f               # Documentos de la entrega final
-        - manuals               # Manuales y guías
-```
-
 ### 1.3 Documentación  del proyecto
 
 Como parte de la entrega final del proyecto, se debe incluir la siguiente información:
 
-* Justificación de los modelo de *bases de datos* que seleccionaron.
-* Descripción del o los *datasets* y las fuentes de información utilizadas.
-* Guía de configuración, instalación y despliegue de la solución en la plataforma en la nube  seleccionada.
-* Documentación de la API. Puede ver un ejemplo en [Swagger](https://swagger.io/). 
-* El código debe estar documentado siguiendo los estándares definidos para el lenguaje de programación seleccionado.
+### Descripción del o los datasets y las fuentes de información utilizadas.
+### Documentación de la API. Puede ver un ejemplo en [Swagger](https://swagger.io/).
 
 ## 2. Descripción del proyecto
 
-*[Incluya aquí la descripción del proyecto seleccionado.]*
+chasIT es una solución que une a personas que necesitan realizar trabajos, y a personas que los pueden realizar.
 
 ## 3. Solución
 
 A continuación aparecen descritos los diferentes elementos que forman parte de la solución del proyecto.
 
-### 3.1 Modelos de *bases de datos* utilizados
-
-*[Incluya aquí una explicación del análisis realizado y la justificación de los modelos de *bases de datos* seleccionados. Incluya todo lo que considere necesario para que una persona sin conocimientos técnicos pueda entender de que trata su solución.]*
+### 3.1 Modelos de bases de datos utilizados
+#### MongoDB
+Usamos MongoDB porque la compatibilidad que ofrece fue ideal para cumplir los objetivos del proyecto.  Poder comunicar los datos en formato JSON dentro de la aplicación fue muy conveniente y fue fácil de encontrar documentación.  Lo usamos para el almacenamiento de los usuarios usando documentos con el siguiente formato:
+```sh
+  "_id": "5ccb587c7bc7b000113c8f6e",
+  "firstName": "Juan",
+  "lastName": "Gomez",
+  "email": "juan.gomez@gmail.com.com",
+  "title": "International Plumber",
+  "profileImageUrl": "https://s3.amazonaws.com/uifaces/faces/juangomez/128.jpg",
+  "role": "5ccb587a7bc7b000113c8f51",
+  "isActive": true,
+  "roleName": "Admin",
+  "roleRank": 1,
+  "createdAt": "2019-04-20T20:52:12.150Z",
+  "isEnabled": true,
+  "passwordUpdateRequired": false,
+  "pinUpdateRequired": false,
+  "isDeleted": false
+```
+#### Azure SQL
 
 ### 3.2 Arquitectura de la solución
 
@@ -103,8 +102,19 @@ A continuación aparecen descritos los diferentes elementos que forman parte de 
 
 
 ## 3.6 Pasos a seguir para utilizar el proyecto
-
-*[Incluya aquí una guía paso a paso para poder utilizar el proyecto, desde la clonación del repositorio hasta el despliegue de la solución en una plataforma en la nube.]*
+- Clone el repositorio.
+```sh
+$ git clone https://github.com/salochara/PF-equipo-1/
+```
+- Haga docker-compose desde el directorio del proyecto para crear y conectar los contenedores.  Este paso sólo se tiene que hacer una vez.
+```sh
+$ git docker-compose build && docker-compose run --rm api npm run seed
+```
+- Haga docker-compose up cada vez que quiera correr el proyecto para levantar los contenedores de nuevo.
+```sh
+$ git docker-compose up --build
+```
+- El programa se puede visualizar en localhost:3000
 
 ## 4. Referencias
 
