@@ -8,38 +8,14 @@
 2. Mauricio Coello
 3. Eric Parton
 
-
 ---
-## 1. Aspectos generales
+## 1. Descripción del proyecto
 
-### 1.1 Requerimientos técnicos
+**chasIT** es una solución que une a personas que necesitan realizar trabajos, y a personas que los pueden realizar.  Usuarios que requieren que se haga un trabajo, por ejemplo pintar una cocina, pueden hacer una petición a todos los trabajadores relevantes registrados en la zona, en este ejemplo son los pintores nada más, y los trabajadores pueden aceptar el trabajo si están de acuerdo con las condiciones.
 
-A continuación se mencionan los requerimientos técnicos mínimos del proyecto, favor de tenerlos presente para que cumpla con todos.
+## 2. Solución
 
-* El equipo tiene la libertad de elegir las tecnologías de desarrollo a utilizar en el proyecto, sin embargo, debe tener presente que la solución final se deberá ejecutar en una plataforma en la nube. Puede ser  [Google Cloud Platform](https://cloud.google.com/?hl=es), [Azure](https://azure.microsoft.com/en-us/) o AWS [AWS](https://aws.amazon.com/es/free/).
-* El proyecto debe utilizar al menos dos modelos de bases de datos diferentes, de los estudiados en el curso.
-* La solución debe utilizar una arquitectura de microservicios. Si no tiene conocimiento sobre este tema, le recomiendo la lectura [*Microservices*](https://martinfowler.com/articles/microservices.html) de [Martin Fowler](https://martinfowler.com).
-* La arquitectura debe ser modular, escalable, con redundancia y alta disponibilidad.
-* La arquitectura deberá estar separada claramente por capas (*frontend*, *backend*, *API RESTful*, datos y almacenamiento).
-* Los diferentes componentes del proyecto (*frontend*, *backend*, *API RESTful*, bases de datos, entre otros) deberán ejecutarse sobre contenedores [Docker](https://www.docker.com/) y utilizar [Kubernetes](https://kubernetes.io/) como orquestador.
-* Todo el código, *datasets* y la documentación del proyecto debe alojarse en un repositorio de GitHub siguiendo al estructura que aparece a continuación.
-
-### 1.3 Documentación  del proyecto
-
-Como parte de la entrega final del proyecto, se debe incluir la siguiente información:
-
-### Descripción del o los datasets y las fuentes de información utilizadas.
-### Documentación de la API. Puede ver un ejemplo en [Swagger](https://swagger.io/).
-
-## 2. Descripción del proyecto
-
-chasIT es una solución que une a personas que necesitan realizar trabajos, y a personas que los pueden realizar.
-
-## 3. Solución
-
-A continuación aparecen descritos los diferentes elementos que forman parte de la solución del proyecto.
-
-### 3.1 Modelos de bases de datos utilizados
+### 2.1 Modelos de bases de datos utilizados
 #### MongoDB
 Usamos MongoDB porque la compatibilidad que ofrece fue ideal para cumplir los objetivos del proyecto.  Poder comunicar los datos en formato JSON dentro de la aplicación fue muy conveniente y fue fácil de encontrar documentación.  Lo usamos para el almacenamiento de los usuarios usando documentos con el siguiente formato:
 ```sh
@@ -59,49 +35,136 @@ Usamos MongoDB porque la compatibilidad que ofrece fue ideal para cumplir los ob
   "pinUpdateRequired": false,
   "isDeleted": false
 ```
-#### Azure SQL
+#### SQL
+Escogimos usar SQL con Microsoft Azure porque los tipos que estamos manejando son muy fijos y no requieren de una estructura más complicada que una tabla.  También como sólo maneja tablas pequeñas (categoría, sub-categoría, servicios, etc.), no se espera que tenga que manejar cantidades grandes de datos (como los usuarios registrados por ejemplo).  Por ejemplo, guardamos las categorías con el siguiente formato (definido en C#):
+```sh
+namespace YeloMWS.Models.Category
+{
+    public class YeloCategory
+    {
+        public long Id { get; set; }
+        public string Title { get; set; }
+        public virtual YeloCategory ParentCategory { get; set; }
+        public string CodeName { get; set; }
+        public string IconResource { get; set; }
+    }
+}
+```
 
-### 3.2 Arquitectura de la solución
+### 2.2 Arquitectura de la solución
 
-*[Incluya aquí un diagrama donde se aprecie la arquitectura de la solución propuesta, así como la interacción entre los diferentes componentes de la misma.]*
+Hicimos un frontend con Vue que se comunica a través de NET Core para la base de datos SQL y a través de Node.js para la base de datos de mongoDB, cada parte dentro su propio contenedor en Docker.
+#
+![Arquitectura](arquitectura.png)
 
-### 3.3 Frontend
+### 2.3 Frontend
 
-*[Incluya aquí una explicación de la solución utilizada para el frontend del proyecto. No olvide incluir las ligas o referencias donde se puede encontrar información de los lenguajes de programación, frameworks y librerías utilizadas.]*
+El frontend utiliza el framework de Vue.js.  Permite reusar código a través de templates y facilita la inserción de datos desde documentos de JSON.
 
-#### 3.3.1 Lenguaje de programación
-#### 3.3.2 Framework
-#### 3.3.3 Librerías de funciones o dependencias
+#### 2.3.1 Lenguaje de programación
+El frontend está programado en JavaScript.  Hay código en HTML/CSS (no lenguajes de programación pero cabe mencionar).
+#### 2.3.2 Framework
+| Framework | Utilidad |
+| ------ | ------ |
+| Vue.js | Facilita la creación de interfaces, especialmente en sitios de una sola página. |
 
-### 3.4 Backend
 
-*[Incluya aquí una explicación de la solución utilizada para el backend del proyecto. No olvide incluir las ligas o referencias donde se puede encontrar información de los lenguajes de programación, frameworks y librerías utilizadas.]*
+#### 2.3.3 Librerías de funciones o dependencias
+| Dependencia | Utilidad |
+| ------ | ------ |
+| axios | Promise-based HTTP client de node.js |
+| babel-runtime | Convertidor de ECMAScript |
+| change-case | Cambiar el case de caracteres |
+| chart.js | Para hacer gráficas |
+| datables.net | JQuery plugin para manejar llamadas de JSON |
+| faker | Para generar datos |
+| hideseek | JQuery plugin para hace búsquedas  |
+| http-server | Servidor de http |
+| jquery | JavaScript utility library |
+| lodash | JavaScript utility library |
+| moment | Libreria para manejar fechas |
+| nes | Websockets que trabajan sobre hapi |
+| querystring | Para procesar URLs |
+| sweetalert2 | Para hacer alertas en JavaScript de forma bonita |
+| v-tooltip | On hover tool tips |
+| validator | Validator/sanitiser de strings |
+| vue | Framework para crear interfaces |
+| vuex | Manejo de estados de Vue |
 
-#### 3.4.1 Lenguaje de programación
-#### 3.4.2 Framework
-#### 3.4.3 Librerías de funciones o dependencias
+### 2.4 Backend
+El backend, igual que los APIs, se divide en dos.
+Tenemos MongoDB en un lado del backend, comunicando con el frontend por Node.js directamente.
+Mientras, la base de SQL está en Microsoft Azure.
 
-### 3.5 API
+#### 2.4.1 Lenguaje de programación
+Con MongoDB utilizamos JavaScript (por estar usando Node.js) y con SQL utilizamos C# (por estar usando .NET Core y porque es nativo).
+#### 2.4.2 Framework
+| Framework | Utilidad |
+| ------ | ------ |
+|  |  |
+#### 2.4.3 Librerías de funciones o dependencias
+| Dependencia | Utilidad |
+| ------ | ------ |
+| aws-sdk | Librería para usar AWS y Node.js |
+| bcryptjs | Función de hasheo |
+| bell | Plugin para third-party login |
+| boom | Cambia los errores de HTTP para que sean más entendibles |
+| chalk | Formateo de texto |
+| dotenv | Para guardar cookies |
+| faker | Generar datos |
+| glue | Permite configurar hapi con JSONs |
+| handlebars | Templating usando {{corchetes}} |
+| hapi-auth-jwt2 | Autenticación con hapi |
+| imagemagick | Para editar imagenes |
+| iplocation | Saca una ubicación con un IP |
+| joi | Validación de información con third parties |
+| jsonwebtoken | Implementación de tokens |
+| lodash | JavaScript utility library |
+| mongoose | Facilita usar MongoDB |
+| nes | Websockets que trabajan sobre hapi |
+|node-uuid | Generador de IDs para usuarios |
+| nodemailer | Mandar correos desde node |
+| owasp-password-strength-test | Prueba la fuerza de una contraseña |
+| password-generator | Generador de contraseñas |
+| q | Libreria para implementar promesas |
+| request-promise | Libreria para implementar promesas |
+| require-dir | Libreria para trabajar con directorios extensos |
+| rest-hapi | Generador de RESTful APIs |
+| zxcvbn | Prueba la fuerza de una contraseña |
 
-*[Incluya aquí una explicación de la solución utilizada para implementar la API del proyecto. No olvide incluir las ligas o referencias donde se puede encontrar información de los lenguajes de programación, frameworks y librerías utilizadas.]*
+### 2.5 API
 
-#### 3.5.1 Lenguaje de programación
-#### 3.5.2 Framework
-#### 3.5.3 Librerías de funciones o dependencias
+Usamos dos soluciones para la implementación el API.  
+Primero, para la conexión a la base de datos de MongoDB usamos Node.js.  La decisión fue sencilla por varias razones:
+- Hay un driver oficial de Node.js para MongoDB.
+- Node.js utiliza JavaScript que facilita muchos temas cuando se desarrolla en Internet.
+- Hay documentación amplia que describe la interacción con MongoDBy con Vue. 
 
-*[Incluya aquí una explicación de cada uno de los endpoints que forman parte de la API. Cada endpoint debe estar correctamente documentado.]*
+.NET Core fue utilizado porque es el framework con mayor compatibilidad con bases de datos de SQL en Azure y, otra vez, tiene una gran cantidad de documentación clara.
 
-*[Por cada endpoint debe incluir lo siguiente:]*
+#### 2.5.1 Lenguaje de programación
+Node.js, como su nombre implica, funciona con JavaScript.  Con .NET Core, las definiciones de nuestras clases y los métodos están en C#.
+#### 2.5.2 Framework
+| Framework | Utilidad |
+| ------ | ------ |
+| Node.js | Server environment entre muchas otras cosas |
+| .NET Core | Server environment entre muchas otras cosas |
+#### 2.5.3 Librerías de funciones o dependencias
 
-* **Descripción**:
-* **URL**:
-* **Verbos HTTP**:
-* **Headers**:
-* **Formato JSON del cuerpo de la solicitud**: 
+* **Descripción**: Recibir detalles de cierta categoría
+* **URL**: api/YeloCategories
+* **Verbos HTTP**: GET
+* **Headers**: 
+* **Formato JSON del cuerpo de la solicitud**:
+{   Id: integer,
+Title: string,
+ParentCategory: YeloCategorry,
+CodeName: string,
+IconResource: string }
 * **Formato JSON de la respuesta**:
 
 
-## 3.6 Pasos a seguir para utilizar el proyecto
+## 3. Pasos a seguir para utilizar el proyecto
 - Clone el repositorio.
 ```sh
 $ git clone https://github.com/salochara/PF-equipo-1/
@@ -116,6 +179,16 @@ $ git docker-compose up --build
 ```
 - El programa se puede visualizar en localhost:3000
 
-## 4. Referencias
+## 4. Datasets
+Todos los datos (fuera de las categorías que son pocas) han salido de pruebas reales de una app que Mauricio está desarrollando.  La mayoría de los datos son de usuarios reales que se registraron en pruebas y eventos. 
 
-*[Incluya aquí las referencias a sitios de interés, datasets y cualquier otra información que haya utilizado para realizar el proyecto y que le puedan ser de utilidad a otras personas que quieran usarlo como referencia]*
+## 5. Referencias
+- http://generatedata.com/ - Generador de datos
+- https://www.json-generator.com/ - Generador de datos
+- https://docs.mongodb.com/manual/reference/ - Documentación de Mongo
+- https://docs.microsoft.com/en-us/azure/sql-database/ - Documentación de Azure SQL
+- https://github.com/JKHeadley/appy - Template de dashboard
+- https://azure.microsoft.com/en-us/services/kubernetes-service/docker/ - Información sobre Azure y cómo conectarlo con Docker
+- https://scotch.io/tutorials/building-a-modern-app-using-nestjs-mongodb-and-vuejs - Tutorial, varios
+- https://vuejs.org/v2/guide/ - Tutorial para usar Vue
+- https://aspnetcore.readthedocs.io/en/stable/tutorials/publish-to-azure-webapp-using-vs.html - Tutorial de NET Core
