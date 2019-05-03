@@ -1,4 +1,4 @@
-# TC3041 Proyecto  Final Primavera 2019
+# TC3041 Proyecto Final Primavera 2019
 
 # *chasIT - Chas y lo tienes!*
 ---
@@ -11,7 +11,7 @@
 ---
 ## 1. Descripción del proyecto
 
-**chasIT** es una solución que une a personas que necesitan realizar trabajos, y a personas que los pueden realizar.  Usuarios que requieren que se haga un trabajo, por ejemplo pintar una cocina, pueden hacer una petición a todos los trabajadores relevantes registrados en la zona, en este ejemplo son los pintores nada más, y los trabajadores pueden aceptar el trabajo si están de acuerdo con las condiciones.
+**chasIT** es una solución que une a personas que necesitan realizar trabajos, y a personas que los pueden realizar.  Usuarios que requieren que se haga un trabajo, por ejemplo pintar una casa en la CDMX, pueden hacer una petición que le llega a todos los trabajadores relevantes registrados en la zona, en este ejemplo son los pintores en la CDMX nada más, y los trabajadores pueden aceptar el trabajo si están de acuerdo con las condiciones.
 
 ## 2. Solución
 
@@ -199,35 +199,18 @@ YeloUser: object
 * **URL**: api/GetCards
 * **Verbos HTTP**: POST
 * **Headers**: authorization, content-type
-* **Formato JSON del cuerpo de la solicitud**:
-{ 
-}
-* **Formato JSON de la respuesta**:
-{ 
-}
+
 #
 * **Descripción**: Recibir detalles de cierta categoría
 * **URL**: api/GetUserServices
 * **Verbos HTTP**: POST
 * **Headers**: authorization, content-type
-* **Formato JSON del cuerpo de la solicitud**:
-{ 
-}
-* **Formato JSON de la respuesta**:
-{ 
-}
 
 #
 * **Descripción**: Recibir detalles de cierta categoría
 * **URL**: api/PostCategoria
 * **Verbos HTTP**: POST
 * **Headers**: authorization, content-type
-* **Formato JSON del cuerpo de la solicitud**:
-{ 
-}
-* **Formato JSON de la respuesta**:
-{ 
-}
 
 ## 3. Pasos a seguir para utilizar el proyecto
 - Clone el repositorio.
