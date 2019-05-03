@@ -7,6 +7,7 @@
           <div slot="header">
             <h3 class="box-title">Service Categories</h3>
           </div>
+
           <!-- /box-header -->
 
           <span slot="box-tools">
@@ -15,6 +16,9 @@
           <!-- /box-tools -->
           <!-- Category list -->
           <div slot="body">
+            <div v-if="loading" class="content content-centered">
+              <pulse-loader></pulse-loader>
+            </div>
             <ul class="users-list clearfix">
               <li style="margin:45px" v-for="subcategory in subcategories">
                 <img :src="'/static/img/chasit/' + subcategory.IconResource + '-home@3x.png'" alt="User Image">
@@ -51,7 +55,7 @@
       return {
         subcategories: null,
         categories: null,
-        loading: null,
+        loading: false,
         columns: ['avatar', 'Subcategory', 'ID', 'Request'],
         options: {
           highlightMatches: true,
@@ -66,7 +70,7 @@
             if (request.query) {
               params.$term = request.query
             }
-            this.loading = true
+            this.loading = false
             return this.$userRepository.list(params)
           },
           responseAdapter: (response) => {
@@ -91,7 +95,10 @@
         chasitService.postServiceRequest(json)
           .then((result) => {
             this.categories = result.data
+            this.$snotify.success('Shortly a chazIT Hero will be in contact with you!', 'Done!')
+            this.$router.push('/')
             console.log(result)
+            this.loading = false
           })
           .catch((error) => {
             this.loading = false
@@ -107,6 +114,7 @@
           .then((result) => {
             this.subcategories = result.data
             console.log(this.subcategories)
+            this.loading = false
           })
           .catch((error) => {
             this.loading = false
