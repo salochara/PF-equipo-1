@@ -66,6 +66,7 @@
 
 <script>
     import { chasitService, userService, statsService } from '../../../services'
+    import { mapState } from 'vuex'
 
   export default {
     name: 'ServiceByUser',
@@ -100,6 +101,12 @@
       }
     },
     computed: {
+      ...mapState({
+        user: (state) => state.auth.user,
+        userInfo: (state) => state.userInfo,
+        conversations: (state) => state.conversations,
+        notifications: (state) => state.notifications
+      }),
       addButtonClass () {
         if (this.services) {
           return this.services.count > this.services.limit ? 'shift-add-left' : 'add-item'
@@ -110,7 +117,8 @@
     },
     mounted() {
         this.loading = true
-        chasitService.getChazitUserServices()
+        console.log("BB " + this.user.azureToken)
+        chasitService.getChazitUserServices(this.user.azureToken)
           .then((result) => {
                 this.services = result.data.reverse()
                 this.loading = false
@@ -122,7 +130,7 @@
             console.error(error)
             this.$snotify.error('Failed Getting Categories from Azure', 'Error!')
           }),
-          chasitService.getChazitUserCard()
+          chasitService.getChazitUserCard(this.user.azureToken)
             .then((result) => {
               this.cards = result.data.data
               console.log(result)

@@ -28,12 +28,12 @@ internals.get = function(url, params, options) {
     })
 }
 
-internals.getChazIt = function(url, params, options) {
+internals.getChazIt = function(user, url, params, options) {
   let config = {
     method: 'GET',
     url: url,
     params: params,
-    headers: {'Authorization': "bearer YP9ReyeNo_ugaAgiRmOiYRtWSB8j-qcTWLebvSPxZKQ7qLvIEBFJdN4-Y3Utvn97KMLbpLdHm1vT3wstyqoYbE54ZHdHSIN_BfrLjMXW3AHVfaDS5C2RJoQb-niZ393V7bW_rvhvzS1VsInxDFso-xu3qMBF4lrrEen63pSulPEjWa9GlnoHZSWqi20NJVYNGuNFpBBObXbIJzooHW0lMQ3GBVqlqBDN_a7xZ1LvuCpaJA1bHM6TUGASV9SlsrX5sCtE8ab3UgeTz-dINo_57PqxcsXRF9S4L64oSgL2D2jpld1lkVZ336VnqoUZ3rBtIBTIwGWpvRPfAqRBJaHypVKVahlkUrEhv8Ar9fgyoZ3vnF-Okn6MEIxl33X8Jb7cqjmh6WSWoeJ4CKTlzFef7BX9hIcPErkq9OOofDhbiE2dY_NuPLB6ZNYx8-ebAOduUF5H8mmM7rh3SqS_g0d9lMYaWFH_XoW3N89dbowR36Bsvhtx7Rh0ceUXUsO2JE6l", 
+    headers: {'Authorization': "bearer " + user, 
                 'Content': "application/json",
                 'Content-Type': "application/json"}
   }
@@ -43,21 +43,15 @@ internals.getChazIt = function(url, params, options) {
       return response
     })
     .catch(function(error) {
-      if (error === RESPONSE_MESSAGES.EXPIRED_ACCESS_TOKEN) {
-        store.dispatch('auth/useRefreshToken')
-        return internals.get(url, params, options)
-      } else {
-        throw error
-      }
     })
 }
 
-internals.postChazIt = function(url, payload, options) {
+internals.postChazIt = function(user, url, payload, options) {
   let config = {
     method: 'POST',
     url: url,
     data: payload,
-    headers: {'Authorization': 'bearer YP9ReyeNo_ugaAgiRmOiYRtWSB8j-qcTWLebvSPxZKQ7qLvIEBFJdN4-Y3Utvn97KMLbpLdHm1vT3wstyqoYbE54ZHdHSIN_BfrLjMXW3AHVfaDS5C2RJoQb-niZ393V7bW_rvhvzS1VsInxDFso-xu3qMBF4lrrEen63pSulPEjWa9GlnoHZSWqi20NJVYNGuNFpBBObXbIJzooHW0lMQ3GBVqlqBDN_a7xZ1LvuCpaJA1bHM6TUGASV9SlsrX5sCtE8ab3UgeTz-dINo_57PqxcsXRF9S4L64oSgL2D2jpld1lkVZ336VnqoUZ3rBtIBTIwGWpvRPfAqRBJaHypVKVahlkUrEhv8Ar9fgyoZ3vnF-Okn6MEIxl33X8Jb7cqjmh6WSWoeJ4CKTlzFef7BX9hIcPErkq9OOofDhbiE2dY_NuPLB6ZNYx8-ebAOduUF5H8mmM7rh3SqS_g0d9lMYaWFH_XoW3N89dbowR36Bsvhtx7Rh0ceUXUsO2JE6l',
+    headers: {'Authorization': "bearer " + user,
     'Content-Type': 'application/json'
     }
   }
@@ -68,12 +62,6 @@ internals.postChazIt = function(url, payload, options) {
       return response
     })
     .catch(function(error) {
-      if (error === RESPONSE_MESSAGES.EXPIRED_ACCESS_TOKEN) {
-        store.dispatch('auth/useRefreshToken')
-        return internals.post(url, payload, options)
-      } else {
-        throw error
-      }
     })
 }
 

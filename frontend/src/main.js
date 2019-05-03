@@ -46,10 +46,7 @@ import VTooltip from 'v-tooltip'
 
 import Box from './components/utilities/Box.vue'
 import VueFormInput from './components/utilities/VueFormInput.vue'
-import ChatBox from './components/utilities/ChatBox.vue'
-import NewGroupChat from './components/utilities/NewGroupChat.vue'
 import VueEditor from './components/utilities/VueEditor.vue'
-import VistorMap from './components/utilities/VisitorMap.vue'
 
 // Import global directives
 import vPermission from './directives/v-permission'
@@ -85,10 +82,7 @@ axios.defaults.paramsSerializer = function(params) {
 // Register global components and plugins
 Vue.component('box', Box)
 Vue.component('vue-form-input', VueFormInput)
-Vue.component('chat-box', ChatBox)
-Vue.component('new-group-chat', NewGroupChat)
 Vue.component('vue-editor', VueEditor)
-Vue.component('visitor-map', VistorMap)
 Vue.component('pulse-loader', PulseLoader)
 Vue.component('vue-select', VueSelect)
 Vue.component('vue-password', VuePassword)
@@ -204,9 +198,6 @@ axios.interceptors.response.use(function(response) {
 // Initialize auth header
 axios.defaults.headers.common.Authorization =
   'Bearer ' + store.state.auth.accessToken
-
-// Post to visitor endpoint to record visit
-statsService.postVisit()
 
 // Start our app!
 // eslint-disable-next-line no-new

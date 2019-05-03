@@ -218,7 +218,8 @@ const PERMISSION_STATES = Config.get('/constants/PERMISSION_STATES')
         email: "paula@chazit.es",
         title: "Test ChazIt User",
         profileImageUrl: "https://yelomws.blob.core.windows.net/yelofiles/beautiful-blur-blurred-background-733872.jpg",
-        password: password,
+        password: "Password?01",
+        azureToken: "YP9ReyeNo_ugaAgiRmOiYRtWSB8j-qcTWLebvSPxZKQ7qLvIEBFJdN4-Y3Utvn97KMLbpLdHm1vT3wstyqoYbE54ZHdHSIN_BfrLjMXW3AHVfaDS5C2RJoQb-niZ393V7bW_rvhvzS1VsInxDFso-xu3qMBF4lrrEen63pSulPEjWa9GlnoHZSWqi20NJVYNGuNFpBBObXbIJzooHW0lMQ3GBVqlqBDN_a7xZ1LvuCpaJA1bHM6TUGASV9SlsrX5sCtE8ab3UgeTz-dINo_57PqxcsXRF9S4L64oSgL2D2jpld1lkVZ336VnqoUZ3rBtIBTIwGWpvRPfAqRBJaHypVKVahlkUrEhv8Ar9fgyoZ3vnF-Okn6MEIxl33X8Jb7cqjmh6WSWoeJ4CKTlzFef7BX9hIcPErkq9OOofDhbiE2dY_NuPLB6ZNYx8-ebAOduUF5H8mmM7rh3SqS_g0d9lMYaWFH_XoW3N89dbowR36Bsvhtx7Rh0ceUXUsO2JE6l",
         pin: pin,
         role: roles[0]._id,
         isActive: true
@@ -226,71 +227,11 @@ const PERMISSION_STATES = Config.get('/constants/PERMISSION_STATES')
       {
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
-        email: 'test@readonlyuser.com',
+        email: 'admin@chazit.es',
         title: faker.name.jobTitle(),
-        // profileImageUrl: 'https://www.gravatar.com/avatar/' + Mongoose.Types.ObjectId().toString() + '?r=PG&d=robohash',
         profileImageUrl: faker.image.avatar(),
         password: password,
-        pin: pin,
-        role: roles[0]._id,
-        isActive: true
-      },
-      {
-        firstName: faker.name.firstName(),
-        lastName: faker.name.lastName(),
-        email: 'test@admin.com',
-        title: faker.name.jobTitle(),
-        // profileImageUrl: 'https://www.gravatar.com/avatar/' + Mongoose.Types.ObjectId().toString() + '?r=PG&d=robohash',
-        profileImageUrl: faker.image.avatar(),
-        password: password,
-        pin: pin,
-        role: roles[1]._id,
-        isActive: true
-      },
-      {
-        firstName: faker.name.firstName(),
-        lastName: faker.name.lastName(),
-        email: 'test@readonlyadmin.com',
-        title: faker.name.jobTitle(),
-        // profileImageUrl: 'https://www.gravatar.com/avatar/' + Mongoose.Types.ObjectId().toString() + '?r=PG&d=robohash',
-        profileImageUrl: faker.image.avatar(),
-        password: password,
-        pin: pin,
-        role: roles[1]._id,
-        isActive: true
-      },
-      {
-        firstName: faker.name.firstName(),
-        lastName: faker.name.lastName(),
-        email: 'test@editoradmin.com',
-        title: faker.name.jobTitle(),
-        // profileImageUrl: 'https://www.gravatar.com/avatar/' + Mongoose.Types.ObjectId().toString() + '?r=PG&d=robohash',
-        profileImageUrl: faker.image.avatar(),
-        password: password,
-        pin: pin,
-        role: roles[1]._id,
-        isActive: true
-      },
-      {
-        firstName: faker.name.firstName(),
-        lastName: faker.name.lastName(),
-        email: 'test@superuseradmin.com',
-        title: faker.name.jobTitle(),
-        // profileImageUrl: 'https://www.gravatar.com/avatar/' + Mongoose.Types.ObjectId().toString() + '?r=PG&d=robohash',
-        profileImageUrl: faker.image.avatar(),
-        password: password,
-        pin: pin,
-        role: roles[1]._id,
-        isActive: true
-      },
-      {
-        firstName: faker.name.firstName(),
-        lastName: faker.name.lastName(),
-        email: 'test@superadmin.com',
-        title: faker.name.jobTitle(),
-        // profileImageUrl: 'https://www.gravatar.com/avatar/' + Mongoose.Types.ObjectId().toString() + '?r=PG&d=robohash',
-        profileImageUrl: faker.image.avatar(),
-        password: password,
+        azureToken: "YP9ReyeNo_ugaAgiRmOiYRtWSB8j-qcTWLebvSPxZKQ7qLvIEBFJdN4-Y3Utvn97KMLbpLdHm1vT3wstyqoYbE54ZHdHSIN_BfrLjMXW3AHVfaDS5C2RJoQb-niZ393V7bW_rvhvzS1VsInxDFso-xu3qMBF4lrrEen63pSulPEjWa9GlnoHZSWqi20NJVYNGuNFpBBObXbIJzooHW0lMQ3GBVqlqBDN_a7xZ1LvuCpaJA1bHM6TUGASV9SlsrX5sCtE8ab3UgeTz-dINo_57PqxcsXRF9S4L64oSgL2D2jpld1lkVZ336VnqoUZ3rBtIBTIwGWpvRPfAqRBJaHypVKVahlkUrEhv8Ar9fgyoZ3vnF-Okn6MEIxl33X8Jb7cqjmh6WSWoeJ4CKTlzFef7BX9hIcPErkq9OOofDhbiE2dY_NuPLB6ZNYx8-ebAOduUF5H8mmM7rh3SqS_g0d9lMYaWFH_XoW3N89dbowR36Bsvhtx7Rh0ceUXUsO2JE6l",
         pin: pin,
         role: roles[2]._id,
         isActive: true
@@ -581,40 +522,10 @@ const PERMISSION_STATES = Config.get('/constants/PERMISSION_STATES')
     promises.push(
       RestHapi.addMany(
         models.user,
-        users[1]._id,
+        users[0]._id,
         models.group,
         'groups',
         [groups[0]._id],
-        Log
-      )
-    )
-    promises.push(
-      RestHapi.addMany(
-        models.user,
-        users[3]._id,
-        models.group,
-        'groups',
-        [groups[0]._id],
-        Log
-      )
-    )
-    promises.push(
-      RestHapi.addMany(
-        models.user,
-        users[4]._id,
-        models.group,
-        'groups',
-        [groups[1]._id],
-        Log
-      )
-    )
-    promises.push(
-      RestHapi.addMany(
-        models.user,
-        users[5]._id,
-        models.group,
-        'groups',
-        [groups[2]._id],
         Log
       )
     )

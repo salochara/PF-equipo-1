@@ -113,6 +113,7 @@
 
   import { chasitService } from '../../../services'
 
+  import { mapState } from 'vuex'
 
   import _ from 'lodash'
 
@@ -142,6 +143,14 @@
         cards: {}
       }
     },
+    computed: {
+      ...mapState({
+        user: (state) => state.auth.user,
+        userInfo: (state) => state.userInfo,
+        conversations: (state) => state.conversations,
+        notifications: (state) => state.notifications
+      }),
+    },
     methods: {
       fieldClassName: formService.fieldClassName,
       emailValidator: formService.emailValidator,
@@ -150,7 +159,7 @@
       },
       getYeloCards () {
         this.loading = true
-        chasitService.getChazitUserCard()
+        chasitService.getChazitUserCard(this.user.azureToken)
           .then((result) => {
             this.loading = false
             this.cards = result.data.data

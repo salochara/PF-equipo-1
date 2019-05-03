@@ -61,12 +61,12 @@ const constants = {
     FOR_IP_AND_USER: 5
   },
   LOCKOUT_PERIOD: 30, // in units of minutes
-  API_TITLE: 'appy API',
-  WEB_TITLE: 'appy Admin'
+  API_TITLE: 'API',
+  WEB_TITLE: 'Admin'
 }
 
 const config = {
-  $meta: 'This file configures the appy API.',
+  $meta: 'This file configures the API.',
   constants: constants,
   projectName: constants.API_TITLE,
   port: {

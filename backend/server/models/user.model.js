@@ -68,6 +68,11 @@ module.exports = function(mongoose) {
         exclude: true,
         allowOnUpdate: false
       },
+      azureToken: {
+        type: Types.String,
+        exclude: true,
+        allowOnUpdate: false
+      },
       pin: {
         type: Types.String,
         exclude: true,

@@ -6,12 +6,9 @@ import Profile from '../components/views/profile/Profile.vue'
 
 import userRoutes from './users.route'
 import roleRoutes from './roles.route'
-import groupRoutes from './groups.route'
+//import groupRoutes from './groups.route'
 import permissionRoutes from './permissions.route'
 
-import memberRoutes from './members.route'
-import connectionRoutes from './connections.route'
-import documentRoutes from './documents.route'
 import imageRoutes from './images.route'
 
 import auditLogRoutes from './audit-logs.route'
@@ -45,11 +42,11 @@ const routes = [
       },
       ...userRoutes,
       ...roleRoutes,
-      ...groupRoutes,
+      //...groupRoutes,
       ...permissionRoutes,
-      ...memberRoutes,
-      ...connectionRoutes,
-      ...documentRoutes,
+      //...memberRoutes,
+      //...connectionRoutes,
+      //...documentRoutes,
       ...imageRoutes,
       ...auditLogRoutes,
       ...categoryRoutes

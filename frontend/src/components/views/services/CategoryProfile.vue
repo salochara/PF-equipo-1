@@ -48,6 +48,8 @@
 <script>
   import faker from 'faker'
   import { chasitService, userService, statsService } from '../../../services'
+  import { mapState } from 'vuex'
+
 
 
   export default {
@@ -81,6 +83,14 @@
         }
       }
     },
+    computed: {
+      ...mapState({
+        user: (state) => state.auth.user,
+        userInfo: (state) => state.userInfo,
+        conversations: (state) => state.conversations,
+        notifications: (state) => state.notifications
+      }),
+    },
     methods: {
       rowClick (data) {
         this.$router.push({ name: 'MemberProfile', params: { _id: data.row._id }, props: data.row })
@@ -92,7 +102,7 @@
         var obj = { DateTime: '2019-05-02', Description: '', RequestedDateTimeStart: '2019-05-02', RequestedDateTimeEnd: '2019-05-02', Latitude: 19.360140, Longitude: -99.258792, YeloCategory: codename, ServiceType: 0, YeloUserHeroContact: null };
         var json = JSON.stringify(obj);
         console.log(json)
-        chasitService.postServiceRequest(json)
+        chasitService.postServiceRequest(this.user.azureToken, json)
           .then((result) => {
             this.categories = result.data
             this.$snotify.success('Shortly a chazIT Hero will be in contact with you!', 'Done!')
@@ -110,7 +120,8 @@
     mounted() { 
          this.loading = true
          console.log(this.$route.params._id)
-        chasitService.getChazitSubCaretgories(this.$route.params._id)
+          console.log(this.user.azureToken)
+        chasitService.getChazitSubCaretgories(this.user.azureToken, this.$route.params._id)
           .then((result) => {
             this.subcategories = result.data
             console.log(this.subcategories)
