@@ -1,7 +1,7 @@
 <template>
   <section class="content container">
     <div class="text-center ">
-      <div class="box-body align-items">
+      <div class="d-flex justify-content-center">
         <box :classes="['box-danger']"
              :disableFooter="false" :headerBorder="true" :noPadding="false">
           <div slot="header">
@@ -16,7 +16,7 @@
           <!-- Category list -->
           <div slot="body">
             <ul class="users-list clearfix">
-              <li v-for="subcategory in subcategories">
+              <li style="margin:45px" v-for="subcategory in subcategories">
                 <img :src="'/static/img/chasit/' + subcategory.IconResource + '-home@3x.png'" alt="User Image">
                   <a class="users-list-name" href="#"> {{subcategory.Title}}</a>
               <div id="request-service-button">
