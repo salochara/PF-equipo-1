@@ -101,7 +101,8 @@ Con MongoDB utilizamos JavaScript (por estar usando Node.js) y con SQL utilizamo
 #### 2.4.2 Framework
 | Framework | Utilidad |
 | ------ | ------ |
-|  |  |
+| Node.js | Server environment entre muchas otras cosas |
+| .NET Core | Server environment entre muchas otras cosas |
 #### 2.4.3 Librerías de funciones o dependencias
 | Dependencia | Utilidad |
 | ------ | ------ |
@@ -154,15 +155,79 @@ Node.js, como su nombre implica, funciona con JavaScript.  Con .NET Core, las de
 * **Descripción**: Recibir detalles de cierta categoría
 * **URL**: api/YeloCategories
 * **Verbos HTTP**: GET
-* **Headers**: 
+* **Headers**: authorization, content-type
 * **Formato JSON del cuerpo de la solicitud**:
 {   Id: integer,
 Title: string,
 ParentCategory: YeloCategorry,
 CodeName: string,
 IconResource: string }
-* **Formato JSON de la respuesta**:
+* **Formato JSON de la respuesta**: 
+{ CodeName: string,
+IconResource: string,
+Id: integer,
+ParentCategor: string,
+Title: string}
 
+#
+* **Descripción**: Recibir detalles de cierta categoría
+* **URL**: api/postYeloCategories
+* **Verbos HTTP**: POST
+* **Headers**: authorization, content-type
+* **Formato JSON del cuerpo de la solicitud**:
+{   DateTime: datetime,
+Description: string,
+RequestedDateTimeStart: datetime,
+Latitude: float,
+Longitude: float,
+YeloCategory: integer,
+ServiceType: integer}
+* **Formato JSON de la respuesta**:
+{ DateTime: datetime,
+Description: string,
+Id: integer,
+RequestedDateTimeEnd: datetime,
+RequestedDateTimeStart: datetime,
+ServiceType: integer,
+YeloCategory: integer,
+YeloSP: integer,
+YeloUser: object
+}
+
+#
+* **Descripción**: Recibir detalles de cierta categoría
+* **URL**: api/GetCards
+* **Verbos HTTP**: POST
+* **Headers**: authorization, content-type
+* **Formato JSON del cuerpo de la solicitud**:
+{ 
+}
+* **Formato JSON de la respuesta**:
+{ 
+}
+#
+* **Descripción**: Recibir detalles de cierta categoría
+* **URL**: api/GetUserServices
+* **Verbos HTTP**: POST
+* **Headers**: authorization, content-type
+* **Formato JSON del cuerpo de la solicitud**:
+{ 
+}
+* **Formato JSON de la respuesta**:
+{ 
+}
+
+#
+* **Descripción**: Recibir detalles de cierta categoría
+* **URL**: api/PostCategoria
+* **Verbos HTTP**: POST
+* **Headers**: authorization, content-type
+* **Formato JSON del cuerpo de la solicitud**:
+{ 
+}
+* **Formato JSON de la respuesta**:
+{ 
+}
 
 ## 3. Pasos a seguir para utilizar el proyecto
 - Clone el repositorio.
@@ -171,11 +236,11 @@ $ git clone https://github.com/salochara/PF-equipo-1/
 ```
 - Haga docker-compose desde el directorio del proyecto para crear y conectar los contenedores.  Este paso sólo se tiene que hacer una vez.
 ```sh
-$ git docker-compose build && docker-compose run --rm api npm run seed
+$ docker-compose build && docker-compose run --rm api npm run seed
 ```
 - Haga docker-compose up cada vez que quiera correr el proyecto para levantar los contenedores de nuevo.
 ```sh
-$ git docker-compose up --build
+$ docker-compose up --build
 ```
 - El programa se puede visualizar en localhost:3000
 
