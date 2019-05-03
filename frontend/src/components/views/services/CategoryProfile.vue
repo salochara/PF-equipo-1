@@ -2,18 +2,36 @@
   <section class="content">
     <div class="box box-primary">
       <div class="box-body">
-        <v-server-table ref="userTable" url="" :columns="columns" :options="options" v-on:row-click="rowClick">
-          <template slot="beforeBody">
-            <tr v-if="loading" class="VueTables__no-results">
-              <td class="text-center" colspan="6"><pulse-loader></pulse-loader></td>
-            </tr>
-          </template>
-          <template slot="avatar" slot-scope="props">
-            <div>
-              <img :src="props.row.profileImageUrl" class="user-image" alt="User Image">
-            </div>
-          </template>
-        </v-server-table>
+        <box :classes="['box-danger']"
+             :disableFooter="false" :headerBorder="true" :noPadding="false">
+          <div slot="header">
+            <h3 class="box-title">Service Categories</h3>
+          </div>
+          <!-- /box-header -->
+
+          <span slot="box-tools">
+          <!--<span class="label label-danger">8 New Members</span>-->
+        </span>
+          <!-- /box-tools -->
+          <!-- Category list -->
+          <div slot="body">
+            <ul class="users-list clearfix">
+              <li v-for="subcategory in subcategories">
+                <img :src="'/static/img/chasit/' + subcategory.IconResource + '-home@3x.png'" alt="User Image">
+                
+                  <a class="users-list-name" href="#"> {{subcategory.Title}}</a>
+
+
+              </li>
+            </ul>
+            <!-- /.Category list -->
+            <!-- /.users-list -->
+          </div>
+          <!-- /.overlay -->
+        </box>
+
+
+
       </div>
     </div>
   </section>
@@ -21,15 +39,18 @@
 
 <script>
   import faker from 'faker'
+  import { chasitService, userService, statsService } from '../../../services'
+
 
   export default {
     data () {
       return {
+        subcategories: null,
         loading: null,
-        columns: ['avatar', 'firstName', 'lastName', 'email'],
+        columns: ['avatar', 'Subcategory', 'ID', 'Request'],
         options: {
           highlightMatches: true,
-          sortable: ['firstName', 'lastName', 'email'],
+          sortable: ['avatar', 'Subcategory', 'ID'],
           requestFunction: (request) => {
             const params = {}
             params.$page = request.page
@@ -51,28 +72,28 @@
         }
       }
     },
-    mounted(){
-        axios.get('https://hmgcmws.azurewebsites.net/YeloCategories/{id}')
-    },
     methods: {
       rowClick (data) {
         this.$router.push({ name: 'MemberProfile', params: { _id: data.row._id }, props: data.row })
       },
-      avatar () { return faker.image.avatar() }
-    }
+      avatar () { return faker.image.avatar() },
+    },
+    mounted() { 
+         this.loading = true
+         console.log(this.$route.params._id)
+        chasitService.getChazitSubCaretgories(this.$route.params._id)
+          .then((result) => {
+            this.subcategories = result.data
+            console.log(this.subcategories)
+          })
+          .catch((error) => {
+            this.loading = false
+            console.error(error)
+            this.$snotify.error('Failed Getting Subcategories from Azure', 'Error!')
+          })
+
+      
+      }
   }
 </script>
 
-<style lang="scss">
-  .add-user {
-    position: absolute;
-    right: 125px;
-  }
-
-  .user-image {
-    border-radius: 50%;
-    width: 100%;
-    max-width: 45px;
-    height: auto;
-  }
-</style>
