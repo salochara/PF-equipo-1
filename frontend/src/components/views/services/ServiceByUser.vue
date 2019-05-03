@@ -13,6 +13,7 @@
                             <th>Requested</th>
                             <th>Service Provider</th>
                             <th>Service Type</th>
+                            <th>Status</th>
                         </tr>
                 </thead>
                 <tbody>
@@ -26,6 +27,7 @@
                             <template v-if="service.YeloServiceType == 1">
                                 <td>chazIT<strong> Normal Service</strong></td>
                             </template>
+                            <button type="button" class="btn btn-success">Success</button>
                         </tr>
                     </template>
                 </tbody>
