@@ -80,9 +80,9 @@
 
           <div slot="body">
             <ul class="users-list">
-              <li v-for="card in cards">
-                  <div v-if="card.brand == 'Visa'">
-                    <img src="/static/img/chasit/visa@3x.png" alt="Card Image">
+              <li  v-for="card in cards">
+                  <div style="border-radius:50%" v-if="card.brand == 'Visa'">
+                    <img  src="/static/img/chasit/visa@3x.png" alt="Card Image">
                   </div>
                   <div v-else-if="card.brand == 'MasterCard'">
                     <img src="/static/img/chasit/mastercard@3x.png" alt="Card Image">
