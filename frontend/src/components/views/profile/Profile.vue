@@ -10,7 +10,7 @@
         <div class="alert" :class="'alert-info'">{{updateRequiredMessage}}</div>
       </div>
 
-      <div class="box box-primary">
+      <div class="box box-danger">
         <div class="box-body">
 
           <ul class="nav nav-tabs">
