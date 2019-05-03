@@ -74,7 +74,8 @@ namespace YeloMWS.Models.Category
 
 ### 3.2 Arquitectura de la solución
 
-*[Incluya aquí un diagrama donde se aprecie la arquitectura de la solución propuesta, así como la interacción entre los diferentes componentes de la misma.]*
+Hicimos un frontend con Vue que se comunica a través de NET Core para la base de datos SQL y a través de Node.js para la base de datos de mongoDB.
+![Arquitectura](arquitectura.png)
 
 ### 3.3 Frontend
 
@@ -163,3 +164,4 @@ $ git docker-compose up --build
 - https://azure.microsoft.com/en-us/services/kubernetes-service/docker/ - Información sobre Azure y cómo conectarlo con Docker
 - https://scotch.io/tutorials/building-a-modern-app-using-nestjs-mongodb-and-vuejs - Tutorial, varios
 - https://vuejs.org/v2/guide/ - Tutorial para usar Vue
+- https://aspnetcore.readthedocs.io/en/stable/tutorials/publish-to-azure-webapp-using-vs.html - Tutorial de NET Core
