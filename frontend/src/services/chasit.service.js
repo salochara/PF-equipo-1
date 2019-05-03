@@ -19,5 +19,8 @@ internals.postServiceRequest = (request) =>{
   return http.postChazIt("https://hmgcmws.azurewebsites.net/api/V2.0/ServiceRequest/PostRequest/", request)
 }
 
+internals.getChazitSubCaretgories = (id) =>{
+  return http.getChazIt("https://hmgcmws.azurewebsites.net/api/YeloCategories/SubCategories/"+id)
+}
 
 export default internals

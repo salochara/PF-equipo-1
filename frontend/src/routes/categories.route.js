@@ -16,10 +16,6 @@ const routes = [
       },
       {
         path: '/categories/:_id',
-        beforeEnter: (to, from, next) => {
-            axios.get('')
-            to.params._id === 'create' ? next({ name: 'MemberCreate' }) : next()
-          },
         component: CategoryProfile,
         name: 'CategoryProfile',
         meta: {
