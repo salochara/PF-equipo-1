@@ -95,6 +95,9 @@
             </ul>
             <!-- /.users-list -->
           </div>
+          <div v-if="loading" class="overlay">
+            <i class="fa"><pulse-loader></pulse-loader></i>
+          </div>
           <!-- /.overlay -->
         </box>
         </div>
@@ -146,8 +149,10 @@
         return formService.emailUniqueValidator(email, this.oldProfile.email)
       },
       getYeloCards () {
+        this.loading = true
         chasitService.getChazitUserCard()
           .then((result) => {
+            this.loading = false
             this.cards = result.data.data
             console.log(result)
           })
