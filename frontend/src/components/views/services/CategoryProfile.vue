@@ -16,9 +16,6 @@
           <!-- /box-tools -->
           <!-- Category list -->
           <div slot="body">
-            <div v-if="loading" class="content content-centered">
-              <pulse-loader></pulse-loader>
-            </div>
             <ul class="users-list clearfix">
               <li style="margin:45px" v-for="subcategory in subcategories">
                 <img :src="'/static/img/chasit/' + subcategory.IconResource + '-home@3x.png'" alt="User Image">
@@ -32,6 +29,9 @@
             </ul>
             <!-- /.Category list -->
             <!-- /.users-list -->
+          </div>
+          <div v-if="loading" class="overlay">
+            <i class="fa"><pulse-loader></pulse-loader></i>
           </div>
           <!-- /.overlay -->
         </box>

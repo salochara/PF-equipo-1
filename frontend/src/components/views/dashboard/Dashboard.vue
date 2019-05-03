@@ -9,7 +9,7 @@
         <box :classes="['box-danger']"
              :disableFooter="false" :headerBorder="true" :noPadding="false">
           <div slot="header">
-            <h3 class="box-title">Service Categories</h3>
+            <h3 class="box-title">Available Services</h3>
           </div>
           <!-- /box-header -->
 
@@ -30,6 +30,9 @@
             </ul>
             <!-- /.Category list -->
             <!-- /.users-list -->
+          </div>
+          <div v-if="loading" class="overlay">
+            <i class="fa"><pulse-loader></pulse-loader></i>
           </div>
           <!-- /.overlay -->
         </box>
@@ -119,6 +122,7 @@
         this.loading = true
         userService.chazitTest()
           .then((result) => {
+            this.loading = false
             this.categories = result.data
             console.log(result)
           })
@@ -132,6 +136,7 @@
         this.loading = true
         chasitService.getChazItService()
           .then((result) => {
+            this.loading = false
             this.categories = result.data
             console.log(result)
           })
@@ -149,6 +154,7 @@
         console.log(json)
         chasitService.postServiceRequest(json)
           .then((result) => {
+            this.loading = false
             this.categories = result.data
             console.log(result)
           })

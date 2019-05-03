@@ -12,7 +12,9 @@
                         <tr>
                             <th>Requested</th>
                             <th>Service Provider</th>
+                            <th>Service Category</th>
                             <th>Service Type</th>
+                            <th>Payment</th>
                             <th>Status</th>
                         </tr>
                 </thead>
@@ -21,21 +23,31 @@
                         <tr class="name-row" >
                             <td>{{service.RequestDateTime | moment("dddd, MMMM Do YYYY")}}</td>
                             <td>{{service.YeloSP.FirstName + " " + service.YeloSP.LastName}}</td>
+                            <td>{{service.YeloCategoryCodeName}}</td>
                             <template v-if="service.YeloServiceType == 0">
-                                <td>chazIT<strong> Emergency Service</strong></td>
+                                <td><strong>chazIT</strong> Emergency Service</td>
                             </template>
                             <template v-if="service.YeloServiceType == 1">
-                                <td>chazIT<strong> Normal Service</strong></td>
+                                <td><strong>chazIT</strong> Normal Service</td>
+                            </template>
+                            <template v-if="cards[0].brand == 'Visa'">
+                                <td><img src="/static/img/chasit/visa.png" alt="Card Image"></td>
+                            </template>
+                            <template v-if="cards[0].brand == 'MasterCard'">
+                              <td><img src="/static/img/chasit/mastercard.png" alt="Card Image"></td>
+                            </template>
+                            <template v-if="cards[0].brand == 'American Express'">
+                                <td><img src="/static/img/chasit/americanexpress.png" alt="Card Image"></td>
                             </template>
                             <div class="btn-group">
                               <template v-if="service.ServiceStatus == 0">
-                                  <button style="width: 100px" type="button" class="btn btn-warning">Programmed</button>
+                                  <td><button style="width: 100px" type="button" class="btn btn-warning">Programmed</button></td>
                               </template>
                               <template v-if="service.ServiceStatus == 1">
-                                  <button style="width: 100px" type="button" class="btn btn-success">In-Progress</button>
+                                  <td><button style="width: 100px" type="button" class="btn btn-success">In-Progress</button></td>
                               </template>
                               <template v-if="service.ServiceStatus == 2">
-                                  <button style="width: 100px" type="button" class="btn btn-danger">Finalized</button>
+                                  <td><button style="width: 100px" type="button" class="btn btn-danger">Finalized</button></td>
                               </template>
                             </div>
                         </tr>
@@ -61,6 +73,7 @@
       return {
         loading: null,
         services: null,
+        cards: {},
         documentColumns: ['Id', 'YeloSP', 'YeloCategoryCodeName'],
         documentOptions: {
           highlightMatches: true,
@@ -108,7 +121,16 @@
             this.loading = false
             console.error(error)
             this.$snotify.error('Failed Getting Categories from Azure', 'Error!')
-          })
+          }),
+          chasitService.getChazitUserCard()
+            .then((result) => {
+              this.cards = result.data.data
+              console.log(result)
+            })
+            .catch((error) => {
+              console.error(error)
+              this.$snotify.error('Failed Getting Categories from Azure', 'Error!')
+            })
     },
     methods: {
         ownerRowClick (data) {
