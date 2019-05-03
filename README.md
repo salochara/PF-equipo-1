@@ -4,7 +4,7 @@
 ---
 
 ##### Integrantes:
-1. Salomon Charabati
+1. Salomón Charabati
 2. Mauricio Coello
 3. Eric Parton
 
