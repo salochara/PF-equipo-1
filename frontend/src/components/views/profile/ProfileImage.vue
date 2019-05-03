@@ -4,13 +4,12 @@
       <div class="content">
         <div class="row content-centered profile">
           <croppa v-model="profileImage"
-                  :width="350"
-                  :height="350"
+                  :width="200"
+                  :height="200"
                   placeholder="Click here to choose an image."
                   :placeholder-font-size="14"
                   accept=".png,.jpg,.jpeg,.gif"
                   @init="onReady"
-                  @image-remove="onImageRemove"
                   @file-type-mismatch="onFileTypeMismatch"
                   @file-size-exceed="onFileSizeExceed"
                   @file-choose="onFileChoose"
@@ -45,15 +44,6 @@
 
           <div class="box-body content-centered">
             <pulse-loader></pulse-loader>
-          </div>
-        </div>
-
-        <div class="row" v-if="ready">
-          <div class="content-centered">
-            <button :disabled="(!profileImage.hasImage() || profileImageUrl.includes('gravatar') || !this.dirty) && !fileChosen"
-                    @click="setProfileImage" class="btn btn-primary btn-lg" style="margin-top: 15px;">Set Profile Image</button>
-            <button :disabled="profileImageUrl.includes('gravatar') || profileLoading"
-                    @click="removeProfileImage" class="btn btn-danger btn-lg" style="margin-left: 10px; margin-top: 15px;">Remove Profile Image</button>
           </div>
         </div>
       </div>

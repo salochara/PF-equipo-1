@@ -14,17 +14,12 @@
         <div class="box-body">
 
           <ul class="nav nav-tabs">
-            <li :class="pictureActive"><a data-toggle="tab" href="#picture">Picture</a></li>
-            <li :class="detailsActive"><a data-toggle="tab" href="#details">Details</a></li>
-            <li :class="settingsActive"><a data-toggle="tab" href="#settings">Settings</a></li>
+            <li :class="pictureActive"><a data-toggle="tab" href="#profile">Details</a></li>
           </ul>
 
           <div class="tab-content content">
-            <div id="picture" class="tab-pane fade in" :class="pictureActive">
+            <div id="profile" class="tab-pane fade in" :class="pictureActive">
               <profile-image></profile-image>
-            </div>
-            <div id="details" class="tab-pane fade in" :class="detailsActive" >
-
               <div class="col-md-12">
                 <vue-form :state="formstate" @submit.prevent="onSubmit" class="row">
 
@@ -63,133 +58,46 @@
                       :messages="{ email: 'Please input a valid email', required: 'This field is required', notUnique: 'That email is already in use.' }">
                     </vue-form-input>
                   </validate>
-
-                  <validate auto-label class="form-group" :class="fieldClassName(formstate.title)">
-                    <vue-form-input
-                      v-model="newProfile.title"
-                      :formstate="formstate"
-                      :type="'text'"
-                      :label="'Title:'"
-                      :placeholder="'Ex: Central Marketing Developer'"
-                      :name="'title'"
-                      :messages="{}">
-                    </vue-form-input>
-                  </validate>
-
-                  <validate auto-label class="form-group" :class="fieldClassName(formstate.location)">
-                    <vue-form-input
-                      v-model="newProfile.location"
-                      :formstate="formstate"
-                      :type="'text'"
-                      :label="'Location:'"
-                      :placeholder="'City, State, Country'"
-                      :name="'location'"
-                      :messages="{}">
-                    </vue-form-input>
-                  </validate>
-
-                  <validate auto-label class="form-group" :class="fieldClassName(formstate.education)">
-                    <vue-form-input
-                      v-model="newProfile.education"
-                      :formstate="formstate"
-                      :type="'text'"
-                      :label="'Education:'"
-                      :placeholder="'Ex: B.S. in Computer Science from the University of Tennessee at Knoxville'"
-                      :name="'education'"
-                      :messages="{}">
-                    </vue-form-input>
-                  </validate>
-
-                  <label>Bio:</label>
-                  <textarea v-model="newProfile.bio" class="form-control" style="height:200px;" placeholder="Ex: I'm an amazingly interesting person!"></textarea>
-
                 </vue-form>
 
                 <div class="py-2 text-center row" style="margin-top: 10px">
                   <button class="btn btn-primary" type="submit" @click="updateProfile" :disabled="formstate.$pristine || formstate.$invalid">Update Profile</button>
                   <button class="btn btn-primary" type="submit" @click="clearChanges" :disabled="formstate.$pristine">Clear Changes</button>
                 </div>
-
-                <div class="py-2 text-center row" style="margin-top: 10px">
-                  <button class="btn btn-danger" @click="deleteUserModal">Delete Account</button>
-                </div>
-              </div>
-
-            </div>
-            <div id="settings" class="tab-pane fade in" :class="settingsActive">
-
-              <div class="callout callout-info">
-                <h4>Tip!</h4>
-
-                <p>Your 4 digit PIN will be required if you need to reset your
-                  password in the future. Please keep it somewhere safe.</p>
-              </div>
-
-              <div class="col-md-4 col-md-offset-4">
-                <vue-form :state="passwordFormstate" @submit.prevent="updatePassword" class="row">
-
-                  <validate auto-label class="form-group" :class="fieldClassName(passwordFormstate.newPassword)" :debounce="250" :custom="{ notStrong: passwordScoreValidator }">
-                    <vue-form-input
-                      required
-                      @input="validateConfirm"
-                      v-model="newPassword"
-                      :passwordFormstate="passwordFormstate"
-                      :type="'password'"
-                      :label="'New Password:'"
-                      :name="'newPassword'"
-                      :placeholder="'Please enter your new password.'"
-                      :messages="{ required: 'This field is required', notStrong: 'Password not strong enough' }">
-                    </vue-form-input>
-                  </validate>
-
-                  <validate auto-label class="form-group" :class="fieldClassName(passwordFormstate.confirmPassword)" :debounce="250" :custom="{ notMatch: passwordConfirmValidator }">
-                    <vue-form-input
-                      required
-                      v-model="confirmPassword"
-                      :passwordFormstate="passwordFormstate"
-                      :type="'password'"
-                      :label="'Confirm Password:'"
-                      :name="'confirmPassword'"
-                      :placeholder="'Please confirm your password.'"
-                      :messages="{ required: 'This field is required', notMatch: 'Passwords do not match' }">
-                    </vue-form-input>
-                  </validate>
-
-                  <div class="content-centered">
-                    <button type="submit" class="btn btn-primary btn-lg" style="margin-top: 15px;"
-                            :disabled="passwordFormstate.$pristine || passwordFormstate.$invalid || passwordScoreUpdating">Update Password</button>
-
-                  </div>
-                </vue-form>
-
-                <vue-form :state="pinFormstate" @submit.prevent="updatePIN" class="row">
-
-                  <validate auto-label class="form-group" :class="fieldClassName(pinFormstate.pin)" :custom="{ minlength: minlengthValidator(4) }">
-                    <vue-form-input
-                      required
-                      v-model="pin"
-                      :pinFormstate="pinFormstate"
-                      :type="'text'"
-                      :label="'PIN:'"
-                      :name="'pin'"
-                      :mask="'1111'"
-                      :minlength="'4'"
-                      :placeholder="'Please enter your 4 digit PIN.'"
-                      :messages="{ required: 'This field is required', minlength: 'PIN must be 4 digits.' }">
-                    </vue-form-input>
-                  </validate>
-
-                  <div class="content-centered">
-                    <button type="submit" class="btn btn-primary btn-lg" style="margin-top: 15px;"
-                            :disabled="pinFormstate.$pristine || pinFormstate.$invalid || passwordScoreUpdating">Update PIN</button>
-
-                  </div>
-                </vue-form>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <div>
+      <box :classes="['box-danger']"
+             :disableFooter="false" :headerBorder="true" :noPadding="false">
+          <div slot="header">
+            <h3 class="box-title">Payment Methods</h3>
+          </div>
+          <!-- /box-header -->
+          <!-- /box-tools -->
+
+          <div slot="body">
+            <ul class="users-list">
+              <li v-for="card in cards">
+                  <div v-if="card.brand == 'Visa'">
+                    <img src="/static/img/chasit/visa@3x.png" alt="Card Image">
+                  </div>
+                  <div v-else-if="card.brand == 'MasterCard'">
+                    <img src="/static/img/chasit/mastercard@3x.png" alt="Card Image">
+                  </div>
+                  <div v-else-if="card.brand == 'American Express'">
+                    <img src="/static/img/chasit/americanexpress@3x.png" alt="Card Image">
+                  </div>
+                <h5>{{"•••• " + card.last4}}</h5>
+              </li>
+            </ul>
+            <!-- /.users-list -->
+          </div>
+          <!-- /.overlay -->
+        </box>
+        </div>
     </div>
   </section>
 </template>
@@ -199,6 +107,9 @@
   import { userService, authService, formService, eventBus } from '../../../services'
   import { EVENTS } from '../../../config'
   import swal from 'sweetalert2'
+
+  import { chasitService } from '../../../services'
+
 
   import _ from 'lodash'
 
@@ -224,7 +135,8 @@
         confirmPassword: '',
         pin: null,
         passwordScore: 0,
-        passwordScoreUpdating: false
+        passwordScoreUpdating: false,
+        cards: {}
       }
     },
     methods: {
@@ -232,6 +144,17 @@
       emailValidator: formService.emailValidator,
       emailUniqueValidator (email) {
         return formService.emailUniqueValidator(email, this.oldProfile.email)
+      },
+      getYeloCards () {
+        chasitService.getChazitUserCard()
+          .then((result) => {
+            this.cards = result.data.data
+            console.log(result)
+          })
+          .catch((error) => {
+            console.error(error)
+            this.$snotify.error('Failed Getting Categories from Azure', 'Error!')
+          })
       },
       minlengthValidator (minlength) {
         // the masked input comes with '_' chars, so we need to remove those before checking the length
@@ -349,7 +272,7 @@
       })(this.$store.state.auth.user)
 
       this.oldProfile = _.cloneDeep(this.newProfile)
-
+      this.getYeloCards()
       // Set the active tab
       if (this.$route.query.details) {
         this.detailsActive = 'active'

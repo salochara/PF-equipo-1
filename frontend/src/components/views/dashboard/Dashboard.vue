@@ -9,33 +9,6 @@
         <box :classes="['box-danger']"
              :disableFooter="false" :headerBorder="true" :noPadding="false">
           <div slot="header">
-            <h3 class="box-title">Service Providers</h3>
-          </div>
-          <!-- /box-header -->
-
-          <span slot="box-tools">
-          <!--<span class="label label-danger">8 New Members</span>-->
-        </span>
-          <!-- /box-tools -->
-
-          <div slot="body">
-            <ul class="users-list clearfix">
-              <li v-for="user in newMembers">
-                <img :src="user.profileImageUrl" alt="User Image">
-                <router-link :to="'/members/' + user._id">
-                  <a class="users-list-name" href="#">{{ getName(user) }}</a>
-                </router-link>
-
-                <span class="users-list-date">{{user.createdAt |  moment("D MMM")}}</span>
-              </li>
-            </ul>
-            <!-- /.users-list -->
-          </div>
-          <!-- /.overlay -->
-        </box>
-        <box :classes="['box-danger']"
-             :disableFooter="false" :headerBorder="true" :noPadding="false">
-          <div slot="header">
             <h3 class="box-title">Service Categories</h3>
           </div>
           <!-- /box-header -->
@@ -56,33 +29,6 @@
               </li>
             </ul>
             <!-- /.Category list -->
-            <!-- /.users-list -->
-          </div>
-          <!-- /.overlay -->
-        </box>
-        <box :classes="['box-danger']"
-             :disableFooter="false" :headerBorder="true" :noPadding="false">
-          <div slot="header">
-            <h3 class="box-title">Service Cards</h3>
-          </div>
-          <!-- /box-header -->
-          <!-- /box-tools -->
-
-          <div slot="body">
-            <ul class="users-list">
-              <li v-for="card in cards">
-                  <div v-if="card.brand == 'Visa'">
-                    <img src="/static/img/chasit/visa@3x.png" alt="Card Image">
-                  </div>
-                  <div v-else-if="card.brand == 'MasterCard'">
-                    <img src="/static/img/chasit/mastercard@3x.png" alt="Card Image">
-                  </div>
-                  <div v-else-if="card.brand == 'American Express'">
-                    <img src="/static/img/chasit/americanexpress@3x.png" alt="Card Image">
-                  </div>
-                <h5>{{"•••• " + card.last4}}</h5>
-              </li>
-            </ul>
             <!-- /.users-list -->
           </div>
           <!-- /.overlay -->
@@ -182,19 +128,6 @@
             this.$snotify.error('Failed Getting Categories from Azure', 'Error!')
           })
       },
-      getYeloCards () {
-        this.loading = true
-        chasitService.getChazitUserCard()
-          .then((result) => {
-            this.cards = result.data.data
-            console.log(result)
-          })
-          .catch((error) => {
-            this.loading = false
-            console.error(error)
-            this.$snotify.error('Failed Getting Categories from Azure', 'Error!')
-          })
-      },
       getYeloCategories () {
         this.loading = true
         chasitService.getChazItService()
@@ -268,7 +201,6 @@
     created () {
       this.getNewMembers()
       this.getYeloCategories()
-      this.getYeloCards()
       //this.postYeloService()
     },
     mounted () {

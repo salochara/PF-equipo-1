@@ -26,10 +26,10 @@ const routes = [
         path: 'dashboard',
         alias: '',
         component: Dashboard,
-        name: 'Service Providers',
+        name: 'chazIT Services',
         meta: {
           description: '',
-          title: 'Service Providers',
+          title: 'chazIT Services',
           requiresAuth: true
         }
       },
@@ -39,7 +39,7 @@ const routes = [
         name: 'Profile',
         meta: {
           description: 'Profile details',
-          title: 'Profile',
+          title: 'chazIT Profile',
           requiresAuth: true
         }
       },

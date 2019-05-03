@@ -8,7 +8,7 @@ const routes = [
     name: 'Members',
     meta: {
       description: 'List of chazIT members',
-      title: 'Service Providers',
+      title: 'chazIT Services',
       requiresAuth: true
     }
   },

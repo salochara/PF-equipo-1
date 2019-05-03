@@ -21,10 +21,10 @@
                             <td>{{service.RequestDateTime | moment("dddd, MMMM Do YYYY")}}</td>
                             <td>{{service.YeloSP.FirstName + " " + service.YeloSP.LastName}}</td>
                             <template v-if="service.YeloServiceType == 0">
-                                <td>chazIT Emergency Service</td>
+                                <td>chazIT<strong> Emergency Service</strong></td>
                             </template>
                             <template v-if="service.YeloServiceType == 1">
-                                <td>chazIT Normal Service</td>
+                                <td>chazIT<strong> Normal Service</strong></td>
                             </template>
                         </tr>
                     </template>
@@ -87,7 +87,7 @@
         this.loading = true
         chasitService.getChazitUserServices()
           .then((result) => {
-                this.services = result.data
+                this.services = result.data.reverse()
                 this.loading = false
                 console.log(result.data)
                 return result.data
