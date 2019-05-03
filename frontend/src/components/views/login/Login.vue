@@ -126,7 +126,6 @@
         authService.login({ email, password })
           .then(response => {
             this.loading = false
-            this.$snotify.success('Login successful', 'Success!')
             this.$router.push('/')
           })
           .catch(error => {
@@ -221,6 +220,7 @@
   .btn-outline:hover {
     color: #333333;
   }
+  
 
 
 </style>

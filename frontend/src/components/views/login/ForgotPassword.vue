@@ -117,7 +117,7 @@
 <style lang="scss">
 html, body, .container-table {
   height: 100%;
-  background-color: #282B30 !important;
+  background-color: white !important;
 }
 .container-table {
     display: table;

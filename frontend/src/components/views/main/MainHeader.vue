@@ -96,7 +96,6 @@
         authService.logout()
           .then(response => {
             this.loading = false
-            this.$snotify.success('Log Out successful', 'Success!')
             this.$router.push('/login')
           })
           .catch(error => {
