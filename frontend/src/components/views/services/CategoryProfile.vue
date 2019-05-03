@@ -1,7 +1,7 @@
 <template>
-  <section class="content">
-    <div class="box box-primary">
-      <div class="box-body">
+  <section class="content container">
+    <div class="text-center ">
+      <div class="box-body align-items">
         <box :classes="['box-danger']"
              :disableFooter="false" :headerBorder="true" :noPadding="false">
           <div slot="header">
@@ -20,7 +20,7 @@
                 <img :src="'/static/img/chasit/' + subcategory.IconResource + '-home@3x.png'" alt="User Image">
                   <a class="users-list-name" href="#"> {{subcategory.Title}}</a>
               <div id="request-service-button">
-                <button v-on:click="postYeloService">Request Service</button>
+                <button v-on:click="postYeloService(subcategory.CodeName)">Request Service</button>
               </div>
               </li>
             </ul>
@@ -80,10 +80,10 @@
         this.$router.push({ name: 'MemberProfile', params: { _id: data.row._id }, props: data.row })
       },
       avatar () { return faker.image.avatar() },
-      postYeloService () {
+      postYeloService (codename) {
         this.loading = true
         var today = new Date();
-        var obj = { DateTime: '2019-05-02', Description: '', RequestedDateTimeStart: '2019-05-02', RequestedDateTimeEnd: '2019-05-02', Latitude: 19.360140, Longitude: -99.258792, YeloCategory: 'pest', ServiceType: 0, YeloUserHeroContact: null };
+        var obj = { DateTime: '2019-05-02', Description: '', RequestedDateTimeStart: '2019-05-02', RequestedDateTimeEnd: '2019-05-02', Latitude: 19.360140, Longitude: -99.258792, YeloCategory: codename, ServiceType: 0, YeloUserHeroContact: null };
         var json = JSON.stringify(obj);
         console.log(json)
         chasitService.postServiceRequest(json)
