@@ -18,9 +18,11 @@
             <ul class="users-list clearfix">
               <li style="margin:45px" v-for="subcategory in subcategories">
                 <img :src="'/static/img/chasit/' + subcategory.IconResource + '-home@3x.png'" alt="User Image">
-                  <a class="users-list-name" href="#"> {{subcategory.Title}}</a>
+                <br>
+                <a class="users-list-name" href="#"> {{subcategory.Title}}</a>
               <div id="request-service-button">
-                <button v-on:click="postYeloService(subcategory.CodeName)">Request Service</button>
+                <br>
+                <button class="btn btn-primary" v-on:click="postYeloService(subcategory.CodeName)">Request Service</button>
               </div>
               </li>
             </ul>
