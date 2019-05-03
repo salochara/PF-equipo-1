@@ -27,7 +27,17 @@
                             <template v-if="service.YeloServiceType == 1">
                                 <td>chazIT<strong> Normal Service</strong></td>
                             </template>
-                            <button type="button" class="btn btn-success">Success</button>
+                            <div class="btn-group">
+                              <template v-if="service.ServiceStatus == 0">
+                                  <button style="width: 100px" type="button" class="btn btn-warning">Programmed</button>
+                              </template>
+                              <template v-if="service.ServiceStatus == 1">
+                                  <button style="width: 100px" type="button" class="btn btn-success">In-Progress</button>
+                              </template>
+                              <template v-if="service.ServiceStatus == 2">
+                                  <button style="width: 100px" type="button" class="btn btn-danger">Finalized</button>
+                              </template>
+                            </div>
                         </tr>
                     </template>
                 </tbody>

@@ -20,8 +20,7 @@
                 <img :src="pictureUrl" class="img-circle" alt="User Image">
 
                 <p>
-                  {{user.firstName}} {{user.lastName}} - {{user.roleName}}
-                  <small>Member since {{user.createdAt | moment("MMMM, YYYY")}}</small>
+                  <small><strong>Welcome back to chazIT {{user.firstName}}!</strong></small>
                 </p>
               </li>
               <!-- Menu Footer-->
