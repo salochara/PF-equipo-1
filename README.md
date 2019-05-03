@@ -219,11 +219,15 @@ $ git clone https://github.com/salochara/PF-equipo-1/
 ```
 - Haga docker-compose desde el directorio del proyecto para crear y conectar los contenedores.  Este paso sólo se tiene que hacer una vez.
 ```sh
-$ docker-compose build && docker-compose run --rm api npm run seed
+$ docker-compose build
 ```
 - Haga docker-compose up cada vez que quiera correr el proyecto para levantar los contenedores de nuevo.
 ```sh
-$ docker-compose up --build
+$ docker-compose up
+```
+- En caso de que marque un error en el frontend por que no encuentra alguna dependencia, es necesario entonces correr de nuevo el siguiente comando.
+```sh
+$ docker-compose up
 ```
 - El programa se puede visualizar en localhost:3000
 
