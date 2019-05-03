@@ -53,7 +53,7 @@
     "vue-select": "^2.3.0",
     "vue-snotify": "^3.0.3",
     "vue-spinner": "^1.0.3",
-    "vue-tables-2": "^0.6.89",
+    "vue-tables-2": "^1.4.70",
     "vuex": "^2.0.0",
     "vuex-persistedstate": "^2.3.2",
     "vuex-router-sync": "^4.1.2"

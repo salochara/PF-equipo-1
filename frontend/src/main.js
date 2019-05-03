@@ -31,7 +31,7 @@ import Snotify, { SnotifyPosition } from 'vue-snotify'
 import VueMoment from 'vue-moment'
 
 // Import global components
-import { ServerTable } from 'vue-tables-2'
+import { ServerTable, ClientTable } from 'vue-tables-2'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 import VueForm from 'vue-form'
 import VueSelect from 'vue-select'
@@ -98,6 +98,7 @@ Vue.component('grid-item', VueGridLayout.GridItem)
 Vue.use(VueRouter)
 Vue.use(RestHapiRepository, { httpClient, resources, log: true })
 Vue.use(ServerTable, {}, false)
+Vue.use(ClientTable, {}, false)
 Vue.use(VueForm, {
   inputClasses: {
     valid: 'form-control-success',
