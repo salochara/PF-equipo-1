@@ -8,7 +8,6 @@
 2. Mauricio Coello
 3. Eric Parton
 
-
 ---
 ## 1. Aspectos generales
 
@@ -33,11 +32,9 @@ Como parte de la entrega final del proyecto, se debe incluir la siguiente inform
 
 ## 2. Descripción del proyecto
 
-chasIT es una solución que une a personas que necesitan realizar trabajos, y a personas que los pueden realizar.
+**chasIT** es una solución que une a personas que necesitan realizar trabajos, y a personas que los pueden realizar.  Usuarios que requieren que se haga un trabajo, por ejemplo pintar una cocina, pueden hacer una petición a todos los trabajadores relevantes registrados en la zona, en este ejemplo son los pintores nada más, y los trabajadores pueden aceptar el trabajo si están de acuerdo con las condiciones.
 
 ## 3. Solución
-
-A continuación aparecen descritos los diferentes elementos que forman parte de la solución del proyecto.
 
 ### 3.1 Modelos de bases de datos utilizados
 #### MongoDB
@@ -60,6 +57,20 @@ Usamos MongoDB porque la compatibilidad que ofrece fue ideal para cumplir los ob
   "isDeleted": false
 ```
 #### Azure SQL
+Escogimos usar SQL con Microsoft Azure porque los tipos que estamos manejando son muy fijos y no requieren de una estructura más complicada que una tabla.  También como sólo maneja tablas pequeñas (categoría, sub-categoría, servicios, etc.), no se espera que tenga que manejar cantidades grandes de datos (como los usuarios registrados por ejemplo).  Por ejemplo, guardamos las categorías con el siguiente formato (definido en C#):
+```sh
+namespace YeloMWS.Models.Category
+{
+    public class YeloCategory
+    {
+        public long Id { get; set; }
+        public string Title { get; set; }
+        public virtual YeloCategory ParentCategory { get; set; }
+        public string CodeName { get; set; }
+        public string IconResource { get; set; }
+    }
+}
+```
 
 ### 3.2 Arquitectura de la solución
 
@@ -67,11 +78,37 @@ Usamos MongoDB porque la compatibilidad que ofrece fue ideal para cumplir los ob
 
 ### 3.3 Frontend
 
-*[Incluya aquí una explicación de la solución utilizada para el frontend del proyecto. No olvide incluir las ligas o referencias donde se puede encontrar información de los lenguajes de programación, frameworks y librerías utilizadas.]*
+
 
 #### 3.3.1 Lenguaje de programación
+El frontend está programado en JavaScript.  Hay código en HTML/CSS (no lenguajes de programación pero cabe mencionar).
 #### 3.3.2 Framework
+| Framework | Utilidad |
+| ------ | ------ |
+| vue | Facilita la creación de interfaces, especialmente en sitios de una sola página. |
+| node.js | Server environment entre muchas otras cosas |
+
 #### 3.3.3 Librerías de funciones o dependencias
+| Dependencia | Utilidad |
+| ------ | ------ |
+| axios | Promise-based HTTP client de node.js |
+| babel-runtime | Convertidor de ECMAScript |
+| change-case | Cambiar el case de caracteres |
+| chart.js | Para hacer gráficas |
+| datables.net | JQuery plugin para manejar llamadas de JSON |
+| faker | Para generar datos |
+| hideseek | JQuery plugin para hace búsquedas  |
+| http-server | Servidor de http |
+| jquery | JavaScript utility library |
+| lodash | JavaScript utility library |
+| moment | Libreria para manejar fechas |
+| nes | Websockets que trabajan sobre hapi |
+| querystring | Para procesar URLs |
+| sweetalert2 | Para hacer alertas en JavaScript de forma bonita |
+| v-tooltip | On hover tool tips |
+| validator | Validator/sanitiser de strings |
+| vue | Framework para crear interfaces |
+| vuex | Manejo de estados de Vue |
 
 ### 3.4 Backend
 
@@ -80,6 +117,7 @@ Usamos MongoDB porque la compatibilidad que ofrece fue ideal para cumplir los ob
 #### 3.4.1 Lenguaje de programación
 #### 3.4.2 Framework
 #### 3.4.3 Librerías de funciones o dependencias
+
 
 ### 3.5 API
 
@@ -117,5 +155,11 @@ $ git docker-compose up --build
 - El programa se puede visualizar en localhost:3000
 
 ## 4. Referencias
-
-*[Incluya aquí las referencias a sitios de interés, datasets y cualquier otra información que haya utilizado para realizar el proyecto y que le puedan ser de utilidad a otras personas que quieran usarlo como referencia]*
+- http://generatedata.com/ - Generador de datos
+- https://www.json-generator.com/ - Generador de datos
+- https://docs.mongodb.com/manual/reference/ - Documentación de Mongo
+- https://docs.microsoft.com/en-us/azure/sql-database/ - Documentación de Azure SQL
+- https://github.com/JKHeadley/appy - Template de dashboard
+- https://azure.microsoft.com/en-us/services/kubernetes-service/docker/ - Información sobre Azure y cómo conectarlo con Docker
+- https://scotch.io/tutorials/building-a-modern-app-using-nestjs-mongodb-and-vuejs - Tutorial, varios
+- https://vuejs.org/v2/guide/ - Tutorial para usar Vue
